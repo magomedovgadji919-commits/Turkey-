@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TurkVuz Pro — Университеты Турции</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--tx:#17181a;--mu:#6c7279;--line:#e2e5e9;--ink:#111;--g:#1f9d63;--w:#b7791f;--r:#c53030;--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif}
+*{box-sizing:border-box;margin:0}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{background:var(--bg);color:var(--tx);font:15px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px;width:100%}
+.grid>*,.cities>*,.two>*,.rk>*,.calc>*,.sr>*,.bricks>*,.uni>*{min-width:0}
+.card h4,.card p,.pane,.brick b,.brick small,.cc b,.fr b,.dh h2,.sub{overflow-wrap:anywhere}
+/* верх */
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:18px 0}
+.nl{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.nl button,.nr button{background:none;border:0;padding:4px 0;color:var(--tx);letter-spacing:inherit;text-transform:inherit;font-size:inherit}
+.nl button:hover,.nr button:hover{opacity:.55}
+.logo{font-family:var(--serif);font-size:24px;letter-spacing:.04em;cursor:pointer;white-space:nowrap}.logo b{font-weight:500;opacity:.55}
+.nr{display:flex;gap:16px;justify-content:flex-end;align-items:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;min-width:0}
+.search{width:220px;max-width:100%;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:99px;padding:7px 16px;font-size:13px;letter-spacing:0;text-transform:none}
+.search:focus{outline:none;border-color:var(--ink)}
+/* hero */
+.hero{position:relative;min-height:640px;border-radius:22px;overflow:hidden;background:#d5d9de;isolation:isolate}
+.hbg{position:absolute;inset:0;background-size:cover;background-position:center 70%;z-index:-2}
+.hfog{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f3f4f6 0%,rgba(243,244,246,.88) 24%,rgba(243,244,246,.25) 58%,rgba(243,244,246,0) 100%),linear-gradient(90deg,rgba(243,244,246,.75) 0%,rgba(243,244,246,0) 55%)}
+.wm{font-family:var(--serif);font-weight:500;text-transform:uppercase;font-size:clamp(56px,16vw,230px);line-height:.92;letter-spacing:-.02em;text-align:center;padding-top:16px;background:linear-gradient(180deg,#3b3f44 25%,rgba(59,63,68,.12) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wsub{margin-left:clamp(16px,5vw,60px);letter-spacing:.5em;font-size:13px;text-transform:uppercase;color:#3b3f44}
+.hl{position:absolute;left:clamp(16px,5vw,60px);bottom:90px;max-width:340px}
+.hl h2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,4vw,42px);line-height:1.08;text-transform:uppercase;letter-spacing:.01em}
+.hl p{color:#44494f;font-size:14px;margin:12px 0 20px}
+.pill{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:#fff;border:0;border-radius:99px;padding:10px 12px 10px 24px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.pill i{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(255,255,255,.4);border-radius:50%;font-style:normal;font-size:14px}
+.hr{position:absolute;right:clamp(16px,5vw,60px);top:46%;font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1.6;color:#44494f}
+.hr span{display:block;margin-bottom:6px}
+.glass{position:absolute;right:clamp(16px,5vw,50px);bottom:70px;width:210px;height:126px;border-radius:16px;border:1px solid rgba(255,255,255,.75);background-size:cover;background-position:center;background-color:#8e949b;color:#fff;text-align:left;padding:14px;display:flex;align-items:flex-end;justify-content:space-between;font-size:11px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:16px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.45))}
+.glass span,.glass i{position:relative}
+.glass i{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#fff;color:var(--ink);font-style:normal}
+.pg{position:absolute;left:clamp(16px,5vw,60px);bottom:26px;font-size:11px;color:var(--mu);display:flex;gap:18px}.pg b{color:var(--tx);border-bottom:1px solid var(--tx);font-weight:400;padding-bottom:4px}
+.sd{position:absolute;right:clamp(16px,5vw,60px);bottom:26px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#44494f}
+/* сервисы */
+.sr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 150px;gap:0;align-items:center;padding:34px 8px}
+.sv{background:none;border:0;border-right:1px solid var(--line);text-align:left;padding:0 28px;transition:opacity .2s}
+.sv:hover{opacity:.6}
+.sv small{display:block;color:var(--mu);font-size:11px;margin-bottom:10px}
+.sv b{display:block;font-family:var(--serif);font-size:19px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.sv span{color:var(--mu);font-size:13px}
+.all{justify-self:center;width:110px;height:110px;border-radius:50%;background:#e9ebee;border:0;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:grid;place-items:center;text-align:center;padding-top:8px}
+.all i{display:block;font-style:normal;font-size:20px;margin-bottom:6px}
+/* секции */
+.sect{background:var(--card);border-radius:22px;padding:34px 30px;margin-top:22px}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.sh h3{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.4vw,32px);letter-spacing:.03em;text-transform:uppercase}
+.sh button{background:none;border:0;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.sub{color:var(--mu);font-size:13.5px;margin:-8px 0 16px}
+.cities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.cc{position:relative;aspect-ratio:4/3;border-radius:16px;border:0;overflow:hidden;background-size:cover;background-position:center;background-color:#9aa0a7;color:#fff;text-align:left;padding:0;transition:transform .3s;width:100%}
+.cc:hover{transform:translateY(-3px)}
+.cc::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.6))}
+.cc div{position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
+.cc b{display:block;font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.cc small{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.cc em{font-style:normal;font-size:11px;opacity:.8;text-align:right}
+/* направления */
+.bricks{display:flex;flex-direction:column;gap:8px}
+.brick{display:flex;align-items:center;gap:18px;width:100%;text-align:left;background:#f7f8f9;border:1px solid var(--line);border-radius:14px;padding:16px 20px;transition:.2s}
+.brick:hover{border-color:var(--ink)}
+.brick .bi{font-size:11px;color:var(--mu);width:22px;flex:none}
+.brick .bt{flex:1;min-width:0}.brick b{display:block;font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.03em}
+.brick small{color:var(--mu);font-size:12.5px;display:block}
+.brick .n{font-size:12px;color:var(--mu);text-align:right;flex:none}
+.brick .ar{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;flex:none}
+.brick.on{background:var(--ink);border-color:var(--ink);color:#fff}.brick.on small,.brick.on .n,.brick.on .bi{color:rgba(255,255,255,.65)}.brick.on .ar{border-color:rgba(255,255,255,.4)}
+/* калькулятор */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:26px}
+.calc label{font-size:12px;color:var(--mu);display:block;margin-bottom:4px;letter-spacing:.04em}
+.calc input,.calc select{width:100%;background:#f7f8f9;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin-bottom:10px}
+.meter{height:8px;border-radius:99px;background:#e9ebee;overflow:hidden;margin:8px 0}.meter i{display:block;height:100%;width:0;background:var(--mu);transition:width .4s,background .4s}
+.res b.big{font-family:var(--serif);font-size:38px;font-weight:600}
+/* фильтры */
+.chips{display:flex;gap:8px;min-width:0}
+.chips.w{flex-wrap:wrap}
+.chip{background:#f7f8f9;border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:13px;color:var(--mu);transition:.2s}
+.chip:hover{border-color:var(--ink);color:var(--tx)}.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.filters{display:grid;gap:10px;margin:6px 0}
+.frow{display:flex;gap:10px;align-items:flex-start;min-width:0}
+.frow small{color:var(--mu);width:60px;flex:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding-top:9px}
+.cityrow{display:flex;gap:8px;align-items:flex-start;flex:1;min-width:0}
+.cgrid{flex:1;min-width:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;grid-auto-rows:34px;max-height:34px;overflow:hidden;transition:max-height .3s}
+.cgrid.open{max-height:1400px}
+.cgrid .chip{width:100%;height:34px;padding:0 8px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}
+.cex{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#f7f8f9;font-size:16px;line-height:1;transition:transform .3s,border-color .2s}
+.cex:hover{border-color:var(--ink)}.cex.open{transform:rotate(180deg)}
+.count{color:var(--mu);font-size:13px;margin:14px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:14px}
+.card{background:#f7f8f9;border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:transform .2s,border-color .2s,background .2s}
+.card:hover{transform:translateY(-3px);border-color:var(--ink);background:#fff}
+.card h4{font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.2;letter-spacing:.01em}
+.card p{color:var(--mu);font-size:13.5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.tag{font-size:11.5px;padding:2px 10px;border-radius:99px;background:#fff;color:var(--mu);border:1px solid var(--line);max-width:100%}.tag.d{background:var(--ink);border-color:var(--ink);color:#fff}.tag.g{color:var(--g);border-color:#bfe3d0}.tag.s{color:var(--w);border-color:#ecd9b0}
+.mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--mu)}.mini b{display:block;color:var(--tx);font-size:13.5px;font-weight:500;overflow-wrap:anywhere}
+.more{font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.empty{grid-column:1/-1;text-align:center;color:var(--mu);padding:50px 0}
+/* страницы */
+.view{display:none;padding:18px 0 0}.view.on{display:block;animation:in .25s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.back{background:none;border:1px solid var(--line);border-radius:99px;padding:6px 16px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}.back:hover{border-color:var(--ink)}
+.dh{border-radius:22px;overflow:hidden;margin-bottom:16px;background:var(--card)}
+.bn{height:230px;background-size:cover;background-position:center;background-color:#d5d9de;display:grid;place-items:center;font-family:var(--serif);font-size:70px;color:rgba(0,0,0,.25)}
+.dh .in{padding:20px 26px}.dh h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4vw,38px);line-height:1.15;margin-bottom:10px}
+.uni{display:block}.side{display:none}
+.tabs{display:flex;flex-wrap:wrap;gap:2px 4px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;color:var(--mu);font-size:13.5px}.tab.on{color:var(--tx);border-color:var(--ink)}
+.pane{background:var(--card);border-radius:18px;padding:22px;margin-bottom:14px}
+.pane h4{margin:16px 0 6px;font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.02em}.pane h4:first-child{margin-top:0}
+.pane p,.pane li{color:#3c4046}.pane ul,.pane ol{padding-left:20px}.pane li{margin-bottom:4px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.box{background:#f7f8f9;border:1px solid var(--line);border-radius:14px;padding:16px}.box.f{border-left:3px solid var(--ink)}.box.l{border-left:3px solid var(--w)}.box.g{border-left:3px solid var(--g)}.box.r{border-left:3px solid var(--r)}
+.rk{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;margin-bottom:12px}
+.rk div{background:#f7f8f9;border:1px solid var(--line);border-radius:12px;padding:12px}.rk small{color:var(--mu);display:block;font-size:12px}.rk b{font-family:var(--serif);font-size:22px;font-weight:600;overflow-wrap:anywhere}
+.fr{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}.fr:last-child{border:0}.fr span{color:var(--mu)}.fr b{font-weight:500;text-align:right}
+.note{color:var(--mu);font-size:12.5px;margin-top:12px}
+footer{color:var(--mu);font-size:12px;padding:30px 0 40px;overflow-wrap:anywhere}
+/* ПК-версия */
+@media(min-width:900px){
+.wrap{padding:0 28px}
+.hero{min-height:720px}
+.sect{padding:40px 38px}
+.bricks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.bn{height:320px}
+.uni{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:22px;align-items:start}
+.side{display:block;position:sticky;top:16px}
+.cgrid .chip{font-size:13px}
+}
+@media(min-width:1400px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* телефон */
+@media(max-width:899px){
+.nav{grid-template-columns:1fr;justify-items:center;gap:8px}.nr{justify-content:center;width:100%}.nl{order:3;justify-content:center}
+.sr{grid-template-columns:1fr;gap:18px}.sv{border-right:0;border-bottom:1px solid var(--line);padding:0 0 16px}
+.cities{grid-template-columns:1fr}.two,.calc{grid-template-columns:1fr}
+.hr,.glass,.sd{display:none}.hl{bottom:60px}.hero{min-height:560px}
+.frow small{display:none}.sect{padding:24px 16px}.brick{padding:14px}
+.cgrid{gap:6px}.cgrid .chip{font-size:11px;padding:0 4px}
+.grid{grid-template-columns:minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="nav">
+<div class="nl"><button data-go="cat">Вузы</button><button data-go="dir">Направления</button><button data-go="calc">Шансы</button></div>
+<div class="logo" id="logo">TURKVUZ <b>PRO</b></div>
+<div class="nr"><button data-go="guide">Гид</button><input class="search" id="q" type="search" placeholder="Поиск вуза или города" aria-label="Поиск"></div>
+</header>
+
+<main>
+<section id="list">
+<div class="hero">
+<div class="hbg" id="hbg"></div><div class="hfog"></div>
+<h1 class="wm">Türkiye</h1><div class="wsub">Universities</div>
+<div class="hl"><h2>Поступи<br>в турецкий<br>вуз мечты</h2><p>Рейтинги, языки, условия поступления, гранты и реальная стоимость обучения.</p><button class="pill" data-go="cat">Найти вуз <i>→</i></button></div>
+<div class="hr"><span>01 ———</span>Гранты<br>Платное<br>Поступление</div>
+<button class="glass" id="glass" data-go="guide"><span>Изучить<br>гид</span><i>→</i></button>
+<div class="pg"><b>01</b><span>02</span><span>03</span></div><div class="sd">Scroll to discover</div>
+</div>
+
+<div class="sr">
+<button class="sv" data-go="guide"><small>01</small><b>Грант</b><span>Türkiye Bursları: обучение, жильё и стипендия.</span></button>
+<button class="sv" data-go="guide"><small>02</small><b>Платное</b><span>TR-YÖS, SAT и частные вузы.</span></button>
+<button class="sv" data-go="calc"><small>03</small><b>Шансы</b><span>Оценка по баллу аттестата.</span></button>
+<button class="all" data-go="guide"><span><i>→</i>Все гиды</span></button>
+</div>
+
+<div class="sect"><div class="sh"><h3>Популярные города</h3><button data-go="cat">Смотреть все →</button></div>
+<div class="cities" id="cities"></div></div>
+
+<div class="sect" id="dirSec"><div class="sh"><h3>Направления</h3></div>
+<p class="sub">Нажмите на направление: каталог покажет только его вузы, профильные — первыми. Повторный клик сбрасывает фильтр.</p>
+<div class="bricks" id="bricks"></div></div>
+
+<div class="sect" id="calcSec"><div class="sh"><h3>Шансы на грант</h3></div>
+<p class="sub">Ориентировочная оценка по среднему баллу аттестата. Результат учитывается на вкладке «Грант и портфолио» у каждого вуза.</p>
+<div class="calc">
+<div><label for="gv">Средний балл аттестата</label><input id="gv" type="number" step="0.01" min="0" placeholder="например, 4.5">
+<label for="gs">Шкала</label><select id="gs"><option value="5">5-балльная (Россия, СНГ)</option><option value="100">Проценты (0–100)</option><option value="4">4-балльная (GPA)</option></select>
+<label for="ga">Возраст (на момент подачи)</label><input id="ga" type="number" min="14" max="40" placeholder="например, 17"></div>
+<div class="res" id="res"><span class="sub">Введите средний балл, чтобы увидеть оценку.</span></div></div></div>
+
+<div class="sect" id="catalog"><div class="sh"><h3>Каталог вузов</h3><span class="sub" id="stats" style="margin:0"></span></div>
+<div class="filters">
+<div class="frow"><small>Город</small><div class="cityrow" id="fcity"></div></div>
+<div class="frow"><small>Тип</small><div class="chips w" id="ft"></div></div></div>
+<div class="count" id="cnt"></div>
+<div class="grid" id="grid"></div></div>
+</section>
+<section id="guide" class="view"></section>
+<section id="view" class="view"></section>
+</main>
+<footer>Справочные данные. Список вузов (название, город, тип, год основания) взят из перечня Wikipedia по данным YÖK: в приложении 203 записи; по бюллетеню YÖK 2025–2026 в стране 208 высших учебных заведений и около 6,3 млн студентов. Места в QS World University Rankings 2026 и QS Europe 2026 приведены только для вузов, по которым нашлись публикации; «—» означает отсутствие проверенных данных. Число студентов приблизительное. Для вузов без числа студентов направления и язык ориентировочные. Правила Türkiye Bursları (минимум 70% для бакалавриата, 90% для медицины/стоматологии/фармации, возраст до 21 года) и часть тарифов (Bilkent, METU, Koç, Istinye) взяты с официальных страниц; остальные цены и «ориентиры» по гранту — оценки. Официальных проходных баллов по вузам для гранта не публикуется. Сроки, квоты и цены меняются каждый год: проверяйте сайты вузов, ÖSYM и turkiyeburslari.gov.tr. Фото: Wikimedia Commons (Galata Tower Panorama, Göreme National Park, Pamukkale); авторы и лицензии указаны на страницах файлов.</footer>
+</div>
+
+<script>
+// фото Турции: имена файлов на Wikimedia Commons (можно заменить на свои)
+const PH={ist:"20101106 Galata Tower Istanbul Turkey Panorama.jpg",cap:"Hot air ballons in the Göreme National Park.jpg",pam:"TR Pamukkale White Terraces asv2020-02 img16.jpg"};
+const wm=(k,w)=>`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(PH[k])}?width=${w}`;
+const CP={"Стамбул":"ist","Кайсери":"cap","Денизли":"pam","Невшехир":"cap"};
+const CITYCARDS=[["Стамбул","ist","Мармара"],["Кайсери","cap","Каппадокия"],["Денизли","pam","Памуккале"]];
+const D={
+it:["Компьютеры и IT","Программная инженерия, ИИ, кибербезопасность, data science"],
+eng:["Инженерия","Машиностроение, электроника, строительство, химия, материалы"],
+med:["Медицина","Лечебное дело, сестринское дело, биомедицина"],
+pha:["Фармация и стоматология","Фармация, стоматология, лаборатории"],
+eco:["Экономика и бизнес","Финансы, менеджмент, международная торговля, логистика"],
+arc:["Архитектура и дизайн","Архитектура, градостроительство, промышленный дизайн"],
+law:["Право и международные отношения","Право, политология, международные отношения"],
+hum:["Гуманитарные науки и языки","Языки, история, психология, философия, социология"],
+edu:["Педагогика","Педагогика, подготовка учителей, специальное образование"],
+sci:["Естественные науки","Физика, химия, биология, математика"],
+art:["Искусство и музыка","Изобразительное искусство, музыка, театр, кино"],
+agr:["Сельское хозяйство и ветеринария","Агрономия, ветеринария, пищевые технологии, лесное дело"],
+com:["Коммуникации и медиа","Журналистика, реклама, PR, радио и ТВ"],
+tou:["Туризм и гостеприимство","Туризм, гастрономия, отельный бизнес"],
+avi:["Авиация и морское дело","Авиационная инженерия, пилотирование, морские науки"],
+mil:["Военное дело и безопасность","Военные и полицейские академии (набор, как правило, для граждан Турции)"]};
+const P={it:"олимпиады по информатике и математике, проекты на GitHub, сертификаты (CS50, Coursera), хакатоны",
+eng:"олимпиады по физике и математике, технические проекты, робототехника, кружки",
+med:"олимпиады по биологии и химии, волонтёрство в медицине, научные работы (допуск от 90%)",
+pha:"химия и биология, лабораторные курсы, волонтёрство (допуск от 90%)",
+eco:"олимпиады по математике и экономике, бизнес-проекты, лидерский опыт",
+arc:"портфолио рисунков и макетов; у части вузов — экзамен по рисунку",
+law:"дебаты, Model UN, обществознание, иностранные языки",
+hum:"языковые сертификаты, публикации, лингвистические и гуманитарные олимпиады",
+edu:"опыт работы с детьми, педагогическая практика, волонтёрство",
+sci:"олимпиады по физике, химии, биологии, исследовательские проекты",
+art:"портфолио работ, аудио- и видеозаписи; часто нужен творческий экзамен",
+agr:"биология, химия, агро- и экологические проекты",
+com:"блог, медиапроекты, портфолио текстов или видео",
+tou:"иностранные языки, опыт в сервисе, волонтёрство",
+avi:"физика, математика, английский; для лётных программ — медкомиссия",
+mil:"набор, как правило, только для граждан Турции; условия уточняйте у учебного заведения"};
+const TI={S:["Очень высокий конкурс",95,0],A:["Высокий конкурс",92,1],B:["Средний конкурс",88,2],C:["Умеренный конкурс",80,3]};
+const REG={"Анкара":"Центральная Анатолия","Стамбул":"Мармара","Измир":"Эгейский регион","Бурса":"Мармара","Анталья":"Средиземноморье","Эскишехир":"Центральная Анатолия","Конья":"Центральная Анатолия","Кайсери":"Центральная Анатолия","Трабзон":"Причерноморье","Самсун":"Причерноморье","Эрзурум":"Восточная Анатолия","Адана":"Средиземноморье","Кокаэли":"Мармара","Сакарья":"Мармара","Денизли":"Эгейский регион","Испарта":"Средиземноморье","Эдирне":"Мармара","Элязыг":"Восточная Анатолия","Мерсин":"Средиземноморье","Диярбакыр":"Юго-Восток","Газиантеп":"Юго-Восток","Чанаккале":"Мармара","Мугла":"Эгейский регион","Текирдаг":"Мармара","Айдын":"Эгейский регион","Маниса":"Эгейский регион","Малатья":"Восточная Анатолия","Невшехир":"Центральная Анатолия","Хатай":"Средиземноморье","Шанлыурфа":"Юго-Восток","Ван":"Восточная Анатолия"};
+const CI={"Стамбул":"Крупнейший город страны: больше всего вузов и стажировок, но и самая высокая стоимость жизни.","Анкара":"Столица и университетский город: дешевле Стамбула, много студентов и госучреждений.","Измир":"Эгейское побережье, мягкий климат, спокойный ритм жизни, умеренные цены.","Бурса":"Промышленный город рядом со Стамбулом, развит автопром.","Анталья":"Курортный город на Средиземном море, цены на жильё зависят от сезона.","Эскишехир":"Компактный студенческий город с умеренными ценами.","Конья":"Традиционный город с низкой стоимостью жизни.","Кайсери":"Промышленный центр Центральной Анатолии рядом с Каппадокией, цены ниже средних.","Невшехир":"Центр Каппадокии: скальные пейзажи и воздушные шары, небольшой спокойный город.","Трабзон":"Город на Чёрном море с дождливым климатом и доступным жильём.","Эрзурум":"Холодные зимы и один из самых доступных по ценам регионов.","Адана":"Жаркий южный город с умеренными ценами.","Кокаэли":"Промышленный город рядом со Стамбулом, цены ниже мегаполиса.","Сакарья":"Небольшой город между Стамбулом и Анкарой, доступные цены.","Денизли":"Город рядом с Памуккале, спокойный и недорогой."};
+const FS="≈ $1 000–5 000 в год (ставку каждый год задаёт сам вуз)",FP="≈ $8 000–25 000 в год, зависит от программы";
+// "=" в конце — точное совпадение названия, иначе — по началу названия
+const mt=(n,p)=>p.endsWith("=")?n===p.slice(0,-1):n.startsWith(p);
+const X=[["Middle East","Известные программы: Computer Engineering, Electrical-Electronics, Aerospace, Architecture, Economics. Кампус свыше 4 500 га с лесом и озером, технопарк METU Technopolis."],
+["Bilkent","Программы: Computer Engineering, Electrical-Electronics, Industrial Engineering, Law, International Relations, Music and Performing Arts. Англоязычная система."],
+["Hacettepe","Один из крупнейших медицинских комплексов Анкары; сильные Medicine, Pharmacy, Dentistry на турецком и английском."],
+["Istanbul Technical","Известные программы: Computer Engineering, Aerospace, Mechanical, Architecture, Maritime. Кампус Аязага и технопарк ARI Teknokent."],
+["Boğaziçi","Известные программы: Computer Engineering, Industrial Engineering, Economics, Psychology, Translation. Кампусы на Босфоре, вся учёба на английском."],
+["Koç","Англоязычные Computer Engineering, Electrical-Electronics, Medicine, Economics, Business, Law. Собственная больница и общежития на кампусе Rumeli Feneri."],
+["Sabancı","Известные программы: Computer Science and Engineering, Electronics, Industrial, Economics, Visual Arts and Design. Общий базовый курс на первом году."],
+["Istanbul University=","Один из крупнейших вузов страны: юридический, медицинский, научные и гуманитарные факультеты."],
+["Anadolu","Основные студенты вуза учатся дистанционно в системе открытого образования; очная часть — около 29 тыс. человек (данные 2023–24)."],
+["Yıldız","Известные программы: Computer, Electronics, Mechanical, Civil, Architecture. Кампусы Давутпаша и Бешикташ."],
+["Özyeğin","Известные программы: Computer Science, Industrial Engineering, Aviation Management, Business. Кампус Чекмекёй."],
+["Gebze","Сильны Computer Engineering, Materials Science, Electronics, Physics. Рядом с промышленными R&D-центрами."],
+["İzmir Institute","Сильны Chemistry, Materials, Computer Engineering, Architecture; вуз небольшой и исследовательский."],
+["Abdullah","Англоязычные Computer Engineering, Electrical-Electronics, Mechanical, Architecture; небольшой исследовательский кампус."],
+["Ege","Сильны Medicine, Pharmacy, Agriculture, Engineering; кампус Борнова в Измире."],
+["Akdeniz","Сильны Medicine, Tourism, Agriculture; кампус в Анталье."],
+["Mimar Sinan","Профильные программы: Painting, Sculpture, Ceramics, Architecture, Graphic Design; отбор через творческий экзамен."]];
+// место в мировом QS 2026 (0 — нет данных) и в QS Europe 2026
+const RK=[["Middle East",269,116],["Istanbul Technical",298,124],["Koç",323,143],["Boğaziçi",371,153],["Sabancı",404,148],["Bilkent",415,182],["Hacettepe",571,199],["Istanbul University=",0,226],["Ankara University=",697,244],["Yıldız",736,264],["Gazi University=",0,286],["Ege",0,367],["Gebze",0,375],["Marmara",0,391],["Istanbul Gelişim",0,441],["İzmir Institute",0,444],["Dokuz Eylül",0,453],["Abdullah",0,467],["Özyeğin",0,467],["Erciyes",0,471],["Anadolu",0,476],["Bahçeşehir",0,480],["Selçuk",0,495]];
+// название|тип(1 гос,2 частный,3 военный)|город|направления (первое — главное)|студентов (прибл.)||язык|год|описание|стоимость|уровень конкурса
+const RAW=[
+"Middle East Technical University (ODTÜ/METU)|1|Анкара|it,eng,arc,sci,eco|27000||EN 100%|1956|Лидер технических наук с лесным кампусом и технопарком; вся учёба на английском.|$1 200/год на инженерии и архитектуре (тариф 2025–26)|S",
+"Bilkent University|2|Анкара|it,eng,eco,law,arc,art,sci|14000||EN 100%|1984|Первый частный некоммерческий вуз: сильные науки, право, музыка.|$18 400/год для иностранцев, принятых в 2026 г. (с НДС)|S",
+"Hacettepe University|1|Анкара|med,pha,sci,hum,eng|50000||TR / EN частично|1967|Один из лучших медицинских вузов страны с научными клиниками.||A",
+"Gazi University|1|Анкара|eng,edu,law,arc,hum|60000||TR|1926|Крупный вуз с педагогическими корнями и широкой инженерией.||B",
+"Ankara University|1|Анкара|law,hum,med,agr,sci,com|60000||TR|1946|Первый университет Республики: право, политология, ветеринария.||A",
+"TOBB University of Economics and Technology|2|Анкара|eco,eng,it,law|7000||EN / TR|2003|Частный вуз торговой палаты, сильные связи с бизнесом.||B",
+"Başkent University|2|Анкара|med,pha,eng,hum|20000||TR / EN|1993|Частный вуз с собственной сетью больниц.||C",
+"Atılım University|2|Анкара|eng,it,law,art|12000||EN / TR|1996|Частный вуз с упором на инженерию и дизайн.||C",
+"Çankaya University|2|Анкара|eng,it,law,arc,eco|15000||EN / TR|1997|Частный вуз с англоязычными инженерными и юридическими программами.||C",
+"Ankara Yıldırım Beyazıt University|1|Анкара|med,eng,eco,law|40000||TR / EN частично|2010|Государственный вуз со своей больницей и инженерией.||C",
+"Ankara Social Sciences University|1|Анкара|law,eco,hum|8000||TR / EN|2013|Государственный вуз социальных наук: право, политология, экономика.||B",
+"Ankara Hacı Bayram Veli University|1|Анкара|edu,hum,eco,com|50000||TR|2018|Педагогика, языки и гуманитарные науки.||C",
+"OSTIM Technical University|2|Анкара|eng,it,eco|6000||TR / EN|2017|Частный технический вуз в промышленной зоне OSTIM.||C",
+"Turkish Aeronautical Association University|2|Анкара|avi,eng,it|4000||EN / TR|2011|Частный вуз, специализирующийся на авиации и аэрокосмике.||C",
+"Istanbul Technical University (İTÜ)|1|Стамбул|eng,it,arc,avi,sci|38000||TR / EN 30–100%|1773|Один из старейших технических вузов мира: авиация, архитектура, морское дело.||S",
+"Boğaziçi University|1|Стамбул|eng,it,eco,hum,sci|16000||EN 100%|1863|Престижный англоязычный вуз на берегу Босфора, преемник Robert College.||S",
+"Koç University|2|Стамбул|eng,it,med,eco,law,hum,sci|8000||EN 100%|1993|Крупнейший частный исследовательский вуз со своей больницей.|1 759 500 ₺/год (кроме медицины), медицина 2 608 200 ₺ (сторонние агрегаторы, 2026–27)|S",
+"Sabancı University|2|Стамбул|eng,it,eco,sci,art|5000||EN 100%|1994|Небольшой вуз с междисциплинарной моделью обучения.|≈ $20 000–30 000/год, уточняйте у вуза|S",
+"Istanbul University|1|Стамбул|med,pha,law,hum,eco,sci,com|90000||TR|1453|Старейший университет Турции: традиция идёт от медресе 1453 г.||A",
+"Istanbul University-Cerrahpaşa|1|Стамбул|med,eng,agr|45000||TR|2018|Медицина и инженерия, лесной факультет, большая клиника.||B",
+"Marmara University|1|Стамбул|eco,law,med,pha,hum,com,edu|70000||TR / EN частично|1883|Экономика, право и коммуникации; много кампусов.||B",
+"Yıldız Technical University|1|Стамбул|eng,it,arc,sci|42000||TR / EN частично|1911|Инженерия и архитектура, активные технопарки.||A",
+"Galatasaray University|1|Стамбул|law,eco,eng,com|4000||FR / TR|1992|Небольшой государственный вуз с французским обучением.||A",
+"Mimar Sinan Fine Arts University|1|Стамбул|art,arc,hum|7000||TR|1882|Старейший художественный вуз страны: живопись, дизайн, архитектура.|"+FS+" (+ творческий экзамен)|B",
+"Turkish-German University|1|Стамбул|eng,eco,it|2500||DE / EN|2013|Государственный вуз с немецким обучением и двойными степенями.||A",
+"Özyeğin University|2|Стамбул|eng,it,eco,law,avi,art|8000||EN 100%|2007|Современный частный вуз с акцентом на предпринимательство.||B",
+"Acıbadem University|2|Стамбул|med,pha,eng|9000||EN / TR|2007|Частный медицинский вуз в сети больниц Acıbadem.||B",
+"Bahçeşehir University|2|Стамбул|eco,eng,it,law,art,com,med|35000||EN / TR|1998|Частный вуз с обширными англоязычными программами и обменами.||C",
+"Kadir Has University|2|Стамбул|eco,law,com,eng,art|6000||EN / TR|1997|Небольшой частный вуз на Золотом Роге.||C",
+"Istanbul Bilgi University|2|Стамбул|law,com,eco,art,eng|18000||EN / TR|1996|Частный вуз, известный правом, медиа и искусством.||C",
+"Yeditepe University|2|Стамбул|med,pha,eng,arc,art,law|28000||EN / TR|1996|Частный вуз с широким спектром факультетов и клиниками.||C",
+"Istanbul Medipol University|2|Стамбул|med,pha,com,eng|40000||EN / TR|2009|Частный вуз со своей сетью больниц и медиафакультетом.||C",
+"Üsküdar University|2|Стамбул|hum,med,pha,com|22000||TR / EN|2011|Частный вуз, известный психологией и науками о здоровье.||C",
+"Altınbaş University|2|Стамбул|med,pha,eng,eco|20000||EN / TR|2008|Частный вуз с медицинским и стоматологическим факультетами.||C",
+"Istanbul Okan University|2|Стамбул|eng,art,eco,com|25000||EN / TR|1999|Частный вуз с сильным дизайном и инженерией.||C",
+"Istanbul Kültür University|2|Стамбул|arc,eng,law,eco|20000||EN / TR|2001|Частный вуз с архитектурой, инженерией и правом.||C",
+"Istanbul Aydın University|2|Стамбул|avi,eng,eco,com,art|90000||EN / TR|2003|Крупный частный вуз с авиационными и медийными программами.||C",
+"Piri Reis University|2|Стамбул|avi,eng,eco|4000||EN / TR|2008|Частный вуз морского дела: навигация, судостроение, логистика.||C",
+"Istinye University|2|Стамбул|med,pha,eco,law|20000||EN / TR|2015|Молодой частный вуз с медицинским кластером.|Медицина (EN) ≈ $29 000/год, международные отношения ≈ $8 000/год (тариф вуза 2026–27)|C",
+"Ege University|1|Измир|med,pha,agr,eng,sci,hum|50000||TR|1955|Первый университет Эгейского региона: медицина, агрономия.||B",
+"Dokuz Eylül University|1|Измир|med,eng,arc,art,avi,eco|60000||TR / EN частично|1982|Медицина, морские науки, искусство и инженерия.||B",
+"İzmir Institute of Technology (İYTE)|1|Измир|eng,it,arc,sci|6500||EN / TR|1992|Небольшой исследовательский технический вуз.||A",
+"İzmir University of Economics|2|Измир|eco,eng,law,com,art|10000||EN / TR|2001|Частный вуз с сильными бизнес-программами.||C",
+"Yaşar University|2|Измир|eng,eco,art,com,law|10000||EN / TR|2001|Частный вуз Измира с англоязычными программами.||C",
+"İzmir Katip Çelebi University|1|Измир|med,eng,pha,eco|25000||TR|2010|Молодой государственный вуз с медициной и инженерией.||C",
+"Uludağ University|1|Бурса|eng,med,agr,hum,eco|60000||TR|1975|Автомобилестроение и связи с промышленностью Бурсы.||B",
+"Bursa Technical University|1|Бурса|eng,it,sci,arc|10000||TR|2010|Молодой государственный технический вуз.||C",
+"Akdeniz University|1|Анталья|med,pha,tou,agr,hum,eco|60000||TR|1982|Медицина и туризм на Средиземном море.||B",
+"Antalya Bilim University|2|Анталья|med,eng,tou,eco|8000||EN / TR|2010|Частный вуз Анталии с медициной, туризмом и инженерией.||C",
+"Anadolu University|1|Эскишехир|hum,edu,eco,avi,eng,art|29000||TR|1982|Лидер дистанционного образования: очных около 29 тыс., плюс сотни тысяч студентов в открытом образовании.||B",
+"Eskişehir Technical University|1|Эскишехир|eng,avi,sci|20000||TR|2018|Технический вуз с авиационными и инженерными программами.||C",
+"Eskişehir Osmangazi University|1|Эскишехир|med,eng,agr,sci|50000||TR|1993|Крупный вуз с медициной, инженерией и агронаукой.||C",
+"Selçuk University|1|Конья|med,agr,eng,law,hum,edu|70000||TR|1975|Ветеринария, исламские науки и медицина в городе сельджуков.||C",
+"Necmettin Erbakan University|1|Конья|med,edu,eng,hum|60000||TR|2010|Крупный государственный вуз Коньи.||C",
+"KTO Karatay University|2|Конья|med,eng,eco,hum|10000||TR / EN|2009|Частный вуз Коньи с медициной и инженерией.||C",
+"Erciyes University|1|Кайсери|med,pha,eng,agr,eco|55000||TR|1978|Крупный вуз Центральной Анатолии с сильной медициной.||B",
+"Abdullah Gül University|1|Кайсери|eng,it,sci,arc|6000||EN 100%|2010|Исследовательский англоязычный государственный вуз.||A",
+"Karadeniz Technical University (KTÜ)|1|Трабзон|eng,arc,med,agr,sci|30000||TR|1955|Главный технический вуз региона Чёрного моря.||B",
+"Ondokuz Mayıs University|1|Самсун|med,agr,eng,edu,hum|55000||TR|1975|Крупнейший вуз Причерноморья.||C",
+"Atatürk University|1|Эрзурум|med,pha,agr,eng,edu|100000||TR|1957|Крупнейший вуз Востока с большой клиникой.||C",
+"Erzurum Technical University|1|Эрзурум|eng,sci|8000||TR|2010|Молодой технический вуз Восточной Анатолии.||C",
+"Çukurova University|1|Адана|med,agr,eng,hum|50000||TR|1973|Агро- и медицинские науки Аданы.||C",
+"Gebze Technical University|1|Кокаэли|eng,it,sci|5000||TR / EN частично|1992|Исследовательский вуз в промышленном коридоре Мармары.||A",
+"Kocaeli University|1|Кокаэли|eng,med,hum,edu|50000||TR|1992|Региональный вуз для промышленности Измита.||C",
+"Sakarya University|1|Сакарья|it,eng,eco,hum|65000||TR|1992|Динамичный вуз, популярен у иностранцев.||B",
+"Pamukkale University|1|Денизли|med,eng,tou,hum|45000||TR|1992|Вуз у знаменитых травертинов; медицина и туризм.||C",
+"Süleyman Demirel University|1|Испарта|eng,agr,med|50000||TR|1992|Инженерия, агронауки и медицина на юго-западе страны.||C",
+"Trakya University|1|Эдирне|med,eng,agr,hum|35000||TR|1982|Университет у границы с Болгарией и Грецией.||C",
+"Fırat University|1|Элязыг|med,eng,agr,sci|40000||TR|1975|Крупный вуз Восточной Анатолии.||C",
+"İnönü University|1|Малатья|med,pha,eng,sci|45000||TR|1975|Крупный вуз с сильной медициной.||C",
+"Mersin University|1|Мерсин|med,agr,eng,hum|50000||TR|1992|Вуз на Средиземноморье с портовой инженерией.||C",
+"Dicle University|1|Диярбакыр|med,agr,eng|45000||TR|1966|Старейший вуз Юго-Востока.||C",
+"Gaziantep University|1|Газиантеп|eng,med,hum|50000||TR|1973|Крупный вуз Юго-Востока с инженерной базой.||C",
+"Çanakkale Onsekiz Mart University|1|Чанаккале|agr,eng,tou,hum|55000||TR|1992|Вуз у Дарданелл: агро, море и туризм.||C",
+"Muğla Sıtkı Koçman University|1|Мугла|tou,sci,eng,hum|40000||TR|1992|Вуз эгейского побережья: туризм, морские науки.||C",
+"Tekirdağ Namık Kemal University|1|Текирдаг|agr,eng,med,hum|35000||TR|2006|Региональный вуз с агро- и инженерными программами.||C",
+"Adnan Menderes University|1|Айдын|agr,med,tou,hum|45000||TR|1992|Агро- и медицинские науки на западе страны.||C",
+"Manisa Celal Bayar University|1|Маниса|med,eng,hum,agr|50000||TR|1992|Крупный вуз Эгейского региона.||C",
+"Adana Alparslan Türkeş University of Science and Technology|1|Адана|eng,it,sci||||2011|Государственный технический вуз в Адане.",
+"Adıyaman University|1|Адыяман|med,eng,edu,hum||||2006",
+"Afyon Kocatepe University|1|Афьонкарахисар|med,agr,eng,hum||||1992",
+"Afyonkarahisar Health Sciences University|1|Афьонкарахисар|med,pha||||2018|Государственный вуз наук о здоровье.",
+"Ağrı İbrahim Çeçen University|1|Агры|edu,hum,eco,eng||||2007",
+"Aksaray University|1|Аксарай|eng,edu,eco,hum||||2006",
+"Amasya University|1|Амасья|edu,hum,eco||||2006",
+"Ankara Music and Fine Arts University|1|Анкара|art,hum||||2017|Государственный вуз музыки и изящных искусств.",
+"Ankara Science University|2|Анкара|eco,eng,hum||||2020",
+"Ankara Medipol University|2|Анкара|med,pha||||2018|Частный вуз: медицина и науки о здоровье.",
+"Lokman Hekim University|2|Анкара|med,pha||||2018|Частный вуз наук о здоровье.",
+"TED University|2|Анкара|edu,eng,eco||||2009|Частный вуз фонда TED: педагогика, инженерия, бизнес.",
+"Ufuk University|2|Анкара|med,eng,eco||||1999",
+"Yüksek İhtisas University|2|Анкара|med,pha||||2013|Частный вуз наук о здоровье.",
+"Police Academy|3|Анкара|mil||||1937|Полицейская академия.",
+"Military Academy|3|Анкара|mil||||1848|Военная академия.",
+"Alanya Alaaddin Keykubat University|1|Анталья|eng,tou,med,eco||||2015|Государственный вуз курортного региона Аланьи.",
+"Alanya University|2|Анталья|eco,tou,eng||||2011",
+"Antalya Belek University|2|Анталья|tou,eco||||2015|Частный вуз туристического региона Белек.",
+"Ardahan University|1|Ардахан|hum,eco,edu||||2008",
+"Artvin Çoruh University|1|Артвин|agr,eng,edu||||2007",
+"Balıkesir University|1|Балыкесир|eng,edu,hum,agr||||1992",
+"Bandırma Onyedi Eylül University|1|Балыкесир|eco,hum,eng||||2015",
+"Bartın University|1|Бартын|edu,eng,hum,agr||||2008",
+"Batman University|1|Батман|eng,edu,hum||||2007",
+"Bayburt University|1|Байбурт|edu,hum,eng||||2008",
+"Bilecik Şeyh Edebali University|1|Биледжик|eng,eco,hum||||2007",
+"Bingöl University|1|Бингёль|edu,agr,hum||||2007",
+"Bitlis Eren University|1|Битлис|eng,edu,hum||||2007",
+"Bolu Abant İzzet Baysal University|1|Болу|med,edu,hum,eng||||1992|Государственный вуз с лесным кампусом.",
+"Burdur Mehmet Akif Ersoy University|1|Бурдур|agr,med,edu,hum||||2006",
+"Mudanya University|2|Бурса|eco,law,hum||||2022|Молодой частный вуз близ Бурсы.",
+"Çankırı Karatekin University|1|Чанкыры|edu,hum,eng||||2007",
+"Hitit University|1|Чорум|eng,edu,eco,hum||||2006",
+"Düzce University|1|Дюздже|eng,med,agr,hum||||2006",
+"Erzincan Binali Yıldırım University|1|Эрзинджан|med,edu,hum||||2006",
+"Gaziantep Islam Science and Technology University|1|Газиантеп|eng,med,sci||||2018|Государственный научно-технический вуз.",
+"Hasan Kalyoncu University|2|Газиантеп|eng,eco,law||||2008",
+"Sanko University|2|Газиантеп|med,pha||||2013|Частный вуз с медицинским профилем.",
+"Giresun University|1|Гиресун|med,agr,hum,edu||||2006",
+"Gümüşhane University|1|Гюмюшхане|eng,hum||||2008",
+"Hakkari University|1|Хаккяри|edu,hum||||2008",
+"Iskenderun Technical University|1|Хатай|eng,avi,sci||||2015|Государственный технический вуз, морские программы.",
+"Hatay Mustafa Kemal University|1|Хатай|med,eng,agr,hum||||1992",
+"Iğdır University|1|Ыгдыр|agr,edu,hum||||2008",
+"Isparta University of Applied Sciences|1|Испарта|agr,eng||||2018|Государственный вуз прикладных наук.",
+"Air Force Academy|3|Стамбул|mil||||1951|Военная академия ВВС.",
+"Naval Academy|3|Стамбул|mil||||1773|Военно-морская академия.",
+"Istanbul Medeniyet University|1|Стамбул|hum,med,eng||||2010",
+"Turkish-Japanese Science and Technology University|1|Стамбул|eng,it,sci||||2017|Государственный научно-технический вуз.",
+"University of Health Sciences|1|Стамбул|med,pha||||2015|Государственный университет наук о здоровье.",
+"Beykoz University|2|Стамбул|eco,eng,law||||2016",
+"Bezmialem Vakıf University|2|Стамбул|med,pha||||2010|Частный вуз наук о здоровье.",
+"Biruni University|2|Стамбул|med,pha,eng||||2014",
+"Demiroğlu Bilim University|2|Стамбул|med,eng,eco||||2006",
+"Doğuş University|2|Стамбул|eng,eco,law,art||||1997",
+"Fatih Sultan Mehmet Vakıf University|2|Стамбул|hum,law,eco,eng||||2010",
+"Fenerbahçe University|2|Стамбул|eco,hum,eng||||2016",
+"Haliç University|2|Стамбул|med,arc,eng,art||||1998",
+"Ibn Haldun University|2|Стамбул|hum,law,eco||||2015",
+"Istanbul 29 Mayıs University|2|Стамбул|hum,eco,law||||2010",
+"Istanbul Arel University|2|Стамбул|eng,eco,law,com||||2007",
+"Istanbul Atlas University|2|Стамбул|med,eng,eco||||2018",
+"Istanbul Beykent University|2|Стамбул|eco,law,eng,art||||1997",
+"Istanbul Commerce University|2|Стамбул|eco,law,eng,com||||2001",
+"Istanbul Esenyurt University|2|Стамбул|eco,eng,hum||||2013",
+"Istanbul Galata University|2|Стамбул|eco,law,com||||2019",
+"Istanbul Gedik University|2|Стамбул|eng,eco,hum||||2010",
+"Istanbul Gelişim University|2|Стамбул|eng,eco,com,art||||2011",
+"Istanbul Health and Technology University|2|Стамбул|med,pha,eng||||2018",
+"Istanbul Kent University|2|Стамбул|eco,law,hum||||2016",
+"Istanbul Nişantaşı University|2|Стамбул|eco,art,com,law||||2009",
+"Istanbul Rumeli University|2|Стамбул|eco,law,hum||||2015",
+"Istanbul Sabahattin Zaim University|2|Стамбул|eco,law,eng,hum||||2010",
+"Istanbul Topkapı University|2|Стамбул|eco,law,hum||||2009",
+"Istanbul Yeni Yüzyıl University|2|Стамбул|med,eco,law,hum||||2009",
+"Işık University|2|Стамбул|eng,eco,law,art||||1996",
+"Maltepe University|2|Стамбул|med,eng,law,art||||1997",
+"MEF University|2|Стамбул|eng,eco,law,it||||2012",
+"İzmir Bakırçay University|1|Измир|med,eng,hum||||2016",
+"İzmir Democracy University|1|Измир|eco,hum,eng||||2016",
+"İzmir Tınaztepe University|2|Измир|med,pha||||2018|Частный вуз наук о здоровье.",
+"Kahramanmaraş İstiklal University|1|Кахраманмараш|eng,hum||||2018",
+"Kahramanmaraş Sütçü İmam University|1|Кахраманмараш|agr,med,eng,hum,edu||||1992",
+"Karabük University|1|Карабюк|eng,edu,hum||||2007",
+"Karamanoğlu Mehmetbey University|1|Караман|eng,edu,hum||||2007",
+"Kafkas University|1|Карс|agr,med,eng,hum||||1992",
+"Kastamonu University|1|Кастамону|eng,agr,edu,hum||||2006",
+"Kayseri University|1|Кайсери|med,eng,hum||||2018",
+"Nuh Naci Yazgan University|2|Кайсери|eng,eco,hum||||2009",
+"Kırıkkale University|1|Кырыккале|med,eng,agr,hum||||1992",
+"Kırklareli University|1|Кыркларели|eng,agr,hum||||2007",
+"Kırşehir Ahi Evran University|1|Киршехир|agr,edu,hum||||2006",
+"Kilis 7 Aralık University|1|Килис|eng,agr,hum||||2007",
+"Kocaeli Health and Technology University|2|Кокаэли|med,pha,eng||||2020",
+"Konya Technical University|1|Конья|eng,it,sci,arc||||2018|Государственный технический вуз Коньи.",
+"Konya Food and Agriculture University|2|Конья|agr,eng,eco||||2013|Частный вуз пищевых и агротехнологий.",
+"Kütahya Dumlupınar University|1|Кютахья|eng,sci,hum||||1992",
+"Kütahya Health Sciences University|1|Кютахья|med,pha||||2018|Государственный вуз наук о здоровье.",
+"Malatya Turgut Özal University|1|Малатья|eng,med,hum||||2018",
+"Mardin Artuklu University|1|Мардин|hum,edu,eco||||2007",
+"Çağ University|2|Мерсин|eco,eng,law,art||||1997",
+"Tarsus University|1|Мерсин|eng,agr,hum||||2018",
+"Toros University|2|Мерсин|eng,eco,hum||||2009",
+"Muş Alparslan University|1|Муш|edu,hum,eng||||2007",
+"Nevşehir Hacı Bektaş Veli University|1|Невшехир|tou,edu,hum,eng||||2007|Государственный вуз в Каппадокии.",
+"Cappadocia University|2|Невшехир|tou,eco,hum||||2017|Частный вуз в Каппадокии.",
+"Niğde Ömer Halisdemir University|1|Нигде|eng,agr,hum||||1992",
+"Ordu University|1|Орду|med,agr,edu,hum||||2006",
+"Osmaniye Korkut Ata University|1|Османие|eng,agr,hum||||2007",
+"Recep Tayyip Erdoğan University|1|Ризе|med,agr,edu,hum||||2006",
+"Sakarya University of Applied Sciences|1|Сакарья|eng,eco,agr||||2018|Государственный вуз прикладных наук.",
+"Samsun University|1|Самсун|med,hum,eng||||2018",
+"Siirt University|1|Сиирт|agr,edu,eng||||2007",
+"Sinop University|1|Синоп|eng,tou,edu,hum||||2007",
+"Sivas Cumhuriyet University|1|Сивас|med,pha,eng,hum||||1974",
+"Sivas University of Science and Technology|1|Сивас|eng,it,sci||||2018|Государственный научно-технический вуз.",
+"Harran University|1|Шанлыурфа|agr,med,eng,hum||||1992",
+"Şırnak University|1|Шырнак|eng,edu,hum||||2008",
+"Tokat Gaziosmanpaşa University|1|Токат|med,agr,eng,hum||||1992",
+"Trabzon University|1|Трабзон|med,edu,hum||||2018",
+"Avrasya University|2|Трабзон|eco,eng,hum||||2010",
+"Munzur University|1|Тунджели|hum,edu,eng||||2008",
+"Uşak University|1|Ушак|eng,hum,edu||||2006",
+"Van Yüzüncü Yıl University|1|Ван|agr,med,edu,eng||||1982",
+"Yalova University|1|Ялова|eng,eco,hum||||2008",
+"Yozgat Bozok University|1|Йозгат|eng,agr,hum,edu||||2006",
+"Zonguldak Bülent Ecevit University|1|Зонгулдак|eng,med,hum,edu||||1992"
+];
+// годы основания приведены в соответствие с перечнем Wikipedia (данные YÖK)
+const FIX={"Bilkent":1985,"Başkent":1994,"Koç":1992,"Sabancı":1996,"Galatasaray":1994,"Turkish-German":2010,"Gebze":2014,"Anadolu":1958,"Gaziantep University":1987,"Dicle":1973,"Istanbul Aydın":2007,"Istanbul Kültür":1997,"Atılım":1997};
+const DB=RAW.map((s,i)=>{const a=s.split("|");const t=+a[1];const x=X.find(z=>mt(a[0],z[0]));const rk=RK.find(z=>mt(a[0],z[0]));const fx=Object.keys(FIX).find(k=>a[0].startsWith(k));const n=+a[4];return{id:String(i+1),n:a[0],t,c:a[2],r:REG[a[2]]||"",k:a[3].split(","),s:{toLocaleString:()=>n?"≈ "+n.toLocaleString("ru"):"—"},q:rk&&rk[1]?"#"+rk[1]:"—",qe:rk?rk[2]:0,l:a[6]||(t===2?"TR / EN":"TR"),y:fx?String(FIX[fx]):a[7],d:a[8]||(t===2?"Частный (фондовый) вуз, "+a[2]+".":t===3?"Военное или полицейское учебное заведение.":"Государственный вуз, "+a[2]+"."),f:a[9]||(t===2?FP:t===3?"Набор, как правило, только для граждан Турции — уточняйте":FS),tr:a[10]||"C",x:x?x[1]:(n?"":"Подтверждены название, город, тип и год основания; направления и язык ориентировочные — уточняйте на сайте вуза."),i}});
+const st={q:"",cat:"all",main:true,city:"all",type:"all",id:null,p:null,v:"cat",cex:false};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pr=u=>u.t===2,ty=u=>pr(u)?"Частный":u.t===3?"Военное/спецучреждение":"Государственный";
+const short=n=>n.replace(/\s*\(.*\)/,"");
+const ini=u=>short(u.n).split(/[\s-]+/).filter(w=>/^[A-ZÇĞİÖŞÜ]/.test(w)).slice(0,2).map(w=>w[0]).join("");
+const FB="linear-gradient(135deg,#d9dde2,#eef0f2)";
+function bricks(){$("#bricks").innerHTML=Object.entries(D).map(([k,v],i)=>{
+const all=DB.filter(u=>u.k.includes(k)).length,mn=DB.filter(u=>u.k[0]===k).length;
+return `<button class="brick ${st.cat===k?"on":""}" data-b="${k}" aria-pressed="${st.cat===k}"><span class="bi">${String(i+1).padStart(2,"0")}</span><span class="bt"><b>${v[0]}</b><small>${v[1]}</small></span><span class="n">${mn} профильных<br>${all} всего</span><span class="ar">→</span></button>`}).join("")}
+function chips(el,items,key){$(el).innerHTML=items.map(([v,l])=>`<button class="chip ${st[key]===v?"on":""}" data-k="${key}" data-v="${v}">${l}</button>`).join("")}
+function drawCities(){const m={};DB.forEach(u=>m[u.c]=(m[u.c]||0)+1);
+const l=Object.entries(m).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],"ru")).map(e=>e[0]);
+$("#fcity").innerHTML=`<div class="cgrid ${st.cex?"open":""}">${[["all","Все города"],...l.map(c=>[c,c])].map(([v,t])=>`<button class="chip ${st.city===v?"on":""}" data-k="city" data-v="${esc(v)}" title="${esc(t)}">${esc(t)}</button>`).join("")}</div><button class="cex ${st.cex?"open":""}" data-cex="1" aria-label="${st.cex?"Свернуть города":"Показать все города"}" aria-expanded="${st.cex}">⌄</button>`}
+function drawChips(){drawCities();chips("#ft",[["all","Все"],["1","Государственные"],["2","Частные"],["3","Военные"]],"type")}
+function match(u){const q=st.q.trim().toLowerCase();
+if(st.cat!=="all"){if(!u.k.includes(st.cat))return false;if(st.main&&u.k[0]!==st.cat)return false}
+if(st.city!=="all"&&u.c!==st.city)return false;
+if(st.type!=="all"&&String(u.t)!==st.type)return false;
+return !q||(u.n+" "+u.c+" "+u.r+" "+u.d+" "+u.k.map(k=>D[k][0]).join(" ")).toLowerCase().includes(q)}
+function cardHTML(u){return `<div class="card" data-id="${u.id}"><div class="tags">${st.cat!=="all"&&u.k[0]===st.cat?'<span class="tag d">★ Профильный вуз</span>':""}<span class="tag">${ty(u)}</span><span class="tag">${u.c}</span>${u.t===3?"":`<span class="tag g">Грант: ${TI[u.tr][1]}%+</span>`}</div><h4>${esc(u.n)}</h4><p>${esc(u.d)}</p><div class="tags">${u.k.map(k=>`<span class="tag">${D[k][0]}</span>`).join("")}</div><div class="mini"><span><b>${u.s.toLocaleString("ru")}</b>студентов</span><span><b>${u.y}</b>основан</span><span><b>${u.l.split(" ")[0]}</b>язык</span></div><span class="more">Подробнее →</span></div>`}
+function render(){let r=DB.filter(match);
+if(st.cat!=="all")r.sort((a,b)=>((b.k[0]===st.cat)-(a.k[0]===st.cat))||(TI[a.tr][2]-TI[b.tr][2]));
+let h=`<span>Найдено: ${r.length} из ${DB.length}</span>`;
+if(st.city!=="all")h+=`<button class="chip on" data-k="city" data-v="all">Город: ${esc(st.city)} ×</button>`;
+if(st.cat!=="all")h+=`<span class="tag d">${D[st.cat][0]}</span><button class="chip ${st.main?"on":""}" data-main="1">${st.main?"★ Только профильные вузы":"Показаны все вузы с этим направлением"}</button><button class="chip" data-clr="1">Сбросить направление</button>`;
+$("#cnt").innerHTML=h;
+$("#grid").innerHTML=r.length?r.map(cardHTML).join(""):`<div class="empty">Ничего не найдено. Сбросьте фильтры или переключите «только профильные».</div>`}
+function cities(){$("#cities").innerHTML=CITYCARDS.map(([c,k,s],i)=>{const n=DB.filter(u=>u.c===c).length;
+return `<button class="cc" data-city="${c}" style="background-image:url('${wm(k,900)}')"><div><span><b>${c}</b><small>${s}</small></span><em>${n} вузов · 0${i+1}</em></div></button>`}).join("")}
+function stats(){$("#stats").textContent=`${DB.length} вузов · ${Object.keys(D).length} направлений · ${new Set(DB.map(u=>u.c)).size} городов`}
+function calc(){const v=parseFloat($("#gv").value),sc=+$("#gs").value,age=parseInt($("#ga").value);
+if(isNaN(v)){st.p=null;$("#res").innerHTML='<span class="sub">Введите средний балл, чтобы увидеть оценку.</span>';return}
+const p=Math.min(100,Math.max(0,v/sc*100)),r=Math.round(p*10)/10;st.p=p;
+let lab,col,txt;
+if(p<70){lab="Ниже минимума";col="var(--r)";txt="Для бакалавриата нужно не менее 70%. Рассмотрите платное обучение или вузовские стипендии."}
+else if(p<85){lab="Низкий шанс";col="var(--w)";txt="Допуск есть, но конкурс высокий. Усильте заявку: письмо, олимпиады, сертификаты."}
+else if(p<93){lab="Средний шанс";col="#5aa77a";txt="Хорошая база. Добавьте достижения и подготовьтесь к интервью."}
+else{lab="Высокий шанс";col="var(--g)";txt="Сильный балл. Победителей выбирает конкурс, гарантий нет, но это зона реальных шансов."}
+let ex=p>=90?"Для медицины, стоматологии и фармации порог 90% — вы его проходите.":"Для медицины, стоматологии и фармации порог 90% — пока не проходите.";
+if(!isNaN(age)&&age>=21)ex+=" Внимание: для бакалавриата нужно быть младше 21 года.";
+$("#res").innerHTML=`<b class="big">${r}%</b> <span style="color:${col};font-weight:600">· ${lab}</span><div class="meter"><i style="width:${p}%;background:${col}"></i></div><p>${txt}</p><p class="note">${ex} Перевод 5-балльной шкалы в проценты примерный (4,5 ≈ 90%). Итоговый балл переводит комиссия.</p>`}
+const TABS=["История и статус","Рейтинги","Язык обучения","Условия поступления","Стоимость и платное","Грант и портфолио"];
+function special(u){
+if(u.n.startsWith("Koç"))return `<li><b>Koç:</b> скидки 25 / 50 / 75 / 100% присуждаются по заслугам, отдельной заявки нет. Баллов, которые гарантируют стипендию, нет. Без SAT/ACT, IB или A-Level шансы заметно ниже. На медицине стипендий для иностранцев нет. Вуз публикует статистику баллов принятых ранее иностранцев — найдите её на сайте.</li>`;
+if(u.n.startsWith("Bilkent"))return `<li><b>Bilkent:</b> по данным сторонних источников, скидки 20–100% даются за успеваемость внутри вуза (GPA и рейтинг на программе), а не автоматически при поступлении. Уточните на странице стипендий вуза.</li>`;
+return ""}
+function facts(u){const rows=[["Тип",ty(u)],["Город",u.c+(u.r?", "+u.r:"")],["Основан",u.y],["Студентов",u.s.toLocaleString("ru")],["Язык",u.l],["QS World 2026",u.q],["QS Europe 2026",u.qe?"#"+u.qe:"—"],["Обучение",u.f]];
+if(u.t!==3)rows.push(["Ориентир для гранта",TI[u.tr][1]+"%+"]);
+return `<aside class="side"><div class="pane"><h4>Коротко</h4>${rows.map(r=>`<div class="fr"><span>${r[0]}</span><b>${esc(r[1])}</b></div>`).join("")}</div></aside>`}
+function pane(u,t){
+if(t===0)return `<div class="pane"><h4>Описание</h4><p>${esc(u.d)}</p>${u.x?`<h4>Программы и факты</h4><p>${esc(u.x)}</p>`:""}<h4>Статус и кампус</h4><p>${ty(u)} университет, ${u.c}${u.r?" ("+u.r+")":""}. Основан в ${u.y} г.; студентов: ${u.s.toLocaleString("ru")}.</p><h4>Направления</h4><ul>${u.k.map((k,j)=>`<li><b>${j?"":"★ "}${D[k][0]}:</b> ${D[k][1]}${j?"":" (главный профиль вуза)"}</li>`).join("")}</ul><h4>Город</h4><p>${CI[u.c]||"Региональный город с доступными ценами и небольшим по сравнению с мегаполисами студенческим сообществом."}</p></div>`;
+if(t===1)return `<div class="pane"><div class="rk"><div><small>QS World 2026</small><b>${u.q}</b></div><div><small>QS Europe 2026</small><b>${u.qe?"#"+u.qe:"—"}</b></div><div><small>Студентов</small><b>${u.s.toLocaleString("ru")}</b></div></div><p>Места приведены по QS World University Rankings 2026 и региональному QS Europe 2026. «—» означает, что вуз не найден в публикациях, которые я проверял, а не что его нет в рейтинге.</p><p class="note">Свежие позиции смотрите на topuniversities.com и timeshighereducation.com; они обновляются каждый год. Число студентов приблизительное.</p></div>`;
+if(t===2){const en=u.l.startsWith("EN");return `<div class="pane"><div class="rk"><div><small>Язык программ</small><b>${u.l}</b></div><div><small>Hazırlık</small><b>${en?"Обычно нужен":"Зависит"}</b></div></div><ul><li>${en?"Основной язык — английский: без сертификата (TOEFL / IELTS / внутренний тест) сначала проходят годичный курс Hazırlık.":"Основной язык — не английский: нужен сертификат по языку обучения (для турецкого — TÖMER) либо подготовительный год."}</li><li>Часть программ идёт на английском или смешанно — проверяйте конкретный факультет.</li><li>Внутренний экзамен по языку позволяет пропустить Hazırlık.</li><li>Грант Türkiye Bursları включает годичный курс турецкого, если вы им не владеете.</li></ul></div>`}
+if(t===3)return `<div class="two"><div class="box f"><h4>Иностранным абитуриентам</h4><ul><li><b>${pr(u)?"Частный вуз":"Государственный вуз"}:</b> ${pr(u)?"часто достаточно аттестата и собеседования; у ряда вузов нужны SAT или внутренний тест, часто со скидкой за высокий балл":"основной путь — результат TR-YÖS (ÖSYM) или международный сертификат (SAT, GCE A-Level и др. — по правилам вуза), затем подача заявки в окне приёма вуза"}.</li><li><b>TR-YÖS (ÖSYM):</b> заявки в 2026 г. шли с середины января по начало февраля, экзамен — в апреле, результаты — в мае.</li><li><b>Подача в вуз:</b> у вузов свои окна (пример: основной приём одного из вузов открылся в конце мая, дополнительный — в конце августа–начале сентября 2026 г.).</li><li><b>Нельзя подать по квоте иностранцев:</b> гражданам Турции, окончившим школу в Турции.</li><li><b>Грант Türkiye Bursları:</b> минимум 70% (медицина, стоматология, фармация — 90%), возраст до 21 года.</li></ul></div><div class="box l"><h4>Местным студентам</h4><ul><li><b>YKS (ÖSYM):</b> экзамены TYT и AYT формируют итоговый балл.</li><li>Проходной балл зависит от факультета; медицина, право и инженерия — самые конкурентные.</li><li>Предпочтения подаются в системе ÖSYM (до 24 программ).</li><li>Есть квоты для отличников и олимпиадников.</li></ul></div></div><div class="pane" style="margin-top:14px"><h4>Документы для заявки</h4><ul><li>Аттестат с переводом и (если требуется) апостилем;</li><li>паспорт и фото;</li><li>результат TR-YÖS / SAT / внутреннего теста (если нужен);</li><li>сертификат языка (TOEFL, IELTS, TÖMER и т. п.) либо согласие пройти Hazırlık.</li></ul><p class="note">Сроки, квоты и проходные баллы меняются каждый год: сверяйтесь с сайтом вуза и ÖSYM.${u.t===3?" Для военных и полицейских академий набор, как правило, только для граждан Турции.":""}</p></div>`;
+if(t===4)return `<div class="pane"><div class="rk"><div><small>Обучение для иностранцев</small><b style="font-size:15px;font-family:Inter,sans-serif;font-weight:500">${esc(u.f)}</b></div><div><small>Жильё и питание</small><b style="font-size:15px;font-family:Inter,sans-serif;font-weight:500">≈ 400–650 €/мес</b></div></div>
+<div class="two"><div class="box g"><h4>Бесплатно (грант)</h4><ul><li>Türkiye Bursları: обучение, общежитие, медстраховка и год турецкого — бесплатно.</li><li>Стипендия для бакалавриата ≈ 4 500 ₺/мес (по данным 2026).</li><li>Нужно 70%+ (90%+ для медицины), возраст до 21 года.</li></ul></div>
+<div class="box l"><h4>На платной основе</h4><ol><li>Выберите вуз и откройте страницу «International students» / квоты.</li><li>Выберите путь: аттестат, SAT, TR-YÖS или интервью.</li><li>Подайте онлайн-заявку и загрузите документы.</li><li>Получите письмо о зачислении и оплатите депозит или взнос.</li><li>Оформите студенческую визу, затем разрешение на проживание (ikamet).</li><li>Сдайте язык или пройдите Hazırlık/TÖMER.</li></ol></div></div>
+<h4>Скидки и стипендии</h4><p>${pr(u)?"Частные вузы обычно дают скидки 25–50–75–100% за высокий балл аттестата, SAT или экзамена. Пороги и размеры задаёт вуз.":"Государственные вузы почти не дают скидок, но их обучение дешевле. Главный шанс на бесплатное обучение — Türkiye Bursları."}</p>
+<p class="note">Цены в USD или ₺ меняются каждый год. Проверяйте тариф на сайте вуза.</p></div>`;
+if(u.t===3)return `<div class="pane"><h4>Грант и портфолио</h4><p>Для военных и полицейских академий грант Türkiye Bursları и платный набор иностранцев, как правило, не применяются: набор идёт для граждан Турции. Уточняйте условия на сайте учебного заведения.</p></div>`;
+const [lab,min]=TI[u.tr];let vd="";
+if(st.p!=null){const p=st.p;vd=p<70?`<div class="box r" style="margin-bottom:12px"><b>Ваш балл (${p.toFixed(1)}%) ниже допуска 70%.</b> Подача на грант невозможна.</div>`:p>=min?`<div class="box g" style="margin-bottom:12px"><b>Ваш балл (${p.toFixed(1)}%) в зоне ориентира.</b> Усильте заявку портфолио и письмом.</div>`:p>=min-5?`<div class="box l" style="margin-bottom:12px"><b>Ваш балл (${p.toFixed(1)}%) немного ниже ориентира.</b> Нужно сильное портфолио и интервью.</div>`:`<div class="box l" style="margin-bottom:12px"><b>Ваш балл (${p.toFixed(1)}%) заметно ниже ориентира.</b> Рассмотрите вузы с меньшим конкурсом или платный путь.</div>`}
+return `<div class="pane">${vd}<div class="rk"><div><small>Ориентир аттестата</small><b>${min}–100%</b></div><div><small>Конкурс</small><b style="font-size:16px">${lab}</b></div><div><small>Допуск</small><b style="font-size:16px">70% (90% — медицина)</b></div></div>
+<ul><li>Грант выдаёт программа Türkiye Bursları: вы подаёте заявку на грант, а вуз и специальность назначаются в процессе отбора. Отдельных проходных баллов по вузам программа не публикует.</li><li>В год выдаётся около 5 000 грантов; отбор идёт по оценкам, мотивационному письму и интервью.</li><li class="note">Ориентир — оценка по конкурсности вуза, а не официальная цифра.</li>${special(u)}</ul>
+<h4>Какое портфолио усиливает заявку</h4><ul>${u.k.map(k=>`<li><b>${D[k][0]}:</b> ${P[k]}</li>`).join("")}<li><b>Для всех:</b> конкретное мотивационное письмо (что вы будете делать с дипломом), рекомендации, сертификаты и грамоты.</li></ul></div>`}
+const GUIDE=`<div class="pane"><h4>Грант Türkiye Bursları: всё по порядку</h4>
+<ul><li><b>Что покрывает:</b> обучение, общежитие в госвузе, медицинскую страховку, годичный курс турецкого и ежемесячную стипендию (для бакалавриата ≈ 4 500 ₺, данные 2026 г.).</li>
+<li><b>Кто может:</b> бакалавриат — не менее 70% по аттестату (медицина, стоматология, фармация — 90%), возраст до 21 года. Подача бесплатна, письмо из вуза не нужно.</li>
+<li><b>Сроки 2026:</b> приём заявок с 10 января по 20 февраля; интервью весной; результаты — весной–летом; приезд в сентябре. Следующий цикл обычно похож: следите за turkiyeburslari.gov.tr.</li>
+<li><b>Этапы:</b> проверка допуска → шорт-лист → интервью → решение комиссии. Вуз и программа назначаются в ходе отбора, вы указываете предпочтения.</li>
+<li><b>Конкурс:</b> около 5 000 новых грантов в год; по сторонней оценке, проходимость 2–5%. Победители обычно намного выше минимума.</li>
+<li><b>Документы:</b> аттестат, паспорт, мотивационное письмо, рекомендации, сертификаты и достижения.</li>
+<li><b>Совет:</b> подавайте заявки параллельно на платные пути — не рассчитывайте только на грант.</li></ul></div>
+<div class="pane"><h4>Платное обучение в государственном вузе</h4>
+<ul><li><b>TR-YÖS (ÖSYM):</b> общетурецкий экзамен для иностранцев. В 2026 г.: заявки 14 янв – 3 фев, экзамен 12 апреля, результаты 7 мая. По сторонним данным, сессий в году две.</li>
+<li><b>SAT / A-Level / другие международные дипломы:</b> принимаются по правилам каждого вуза.</li>
+<li><b>Подача в вуз:</b> после результатов YÖS открываются окна приёма вузов (пример 2026 г.: основной приём — с конца мая, дополнительный — с 26 августа по 4 сентября).</li>
+<li><b>Квоты:</b> на каждую программу выделяется ограниченное число мест для иностранцев (по сторонним данным, 5–30).</li>
+<li><b>Стоимость:</b> ставки каждый год задаёт вуз, у METU инженерия $1 200/год (2025–26).</li></ul></div>
+<div class="pane"><h4>Платное обучение в частном вузе</h4>
+<ul><li>Нередко достаточно аттестата и анкеты; часть вузов требует SAT, внутренний тест или интервью.</li>
+<li>Стоимость заметно выше: Bilkent $18 400/год (2026), Koç 1 759 500 ₺/год (кроме медицины), медицина в Istinye ≈ $29 000/год.</li>
+<li>Стипендии: Koç — 25 / 50 / 75 / 100% по заслугам, без отдельной заявки; на медицине скидок нет.</li>
+<li>Вузы часто принимают заявки с весны до конца лета, сроки у каждого свои.</li></ul></div>
+<div class="pane"><h4>Документы, виза, проживание</h4>
+<ol><li>Подготовьте аттестат с переводом и апостилем (если требует вуз), паспорт, фото.</li><li>Получите письмо о зачислении (acceptance letter).</li><li>Оформите студенческую визу в консульстве по письму.</li><li>После приезда оформите разрешение на проживание (ikamet) и страховку.</li><li>Сдайте языковой тест или пройдите Hazırlık/TÖMER.</li></ol>
+<p class="note">Перед подачей всегда проверяйте актуальные требования на сайте вуза и консульства.</p></div>
+<div class="pane"><h4>Жизнь и бюджет</h4>
+<ul><li>Жильё и питание: ≈ 400–650 €/мес для иностранного студента (по сторонним данным).</li><li>Самые дорогие города — Стамбул и курортные регионы; дешевле — Анкара, Конья, Эрзурум.</li><li>Общежитие в госвузе для стипендиатов Bursları бесплатно.</li></ul></div>
+<div class="pane"><h4>План на год (ориентировочно)</h4>
+<ul><li><b>Январь–февраль:</b> заявка на Türkiye Bursları; регистрация на TR-YÖS.</li><li><b>Март–апрель:</b> подготовка к YÖS/SAT; интервью по гранту.</li><li><b>Май–июнь:</b> результаты, подача в госвузы и частные вузы.</li><li><b>Июль–август:</b> стипендии, оплата депозита, документы на визу.</li><li><b>Август–сентябрь:</b> дополнительный приём; виза и приезд.</li></ul></div>
+<div class="pane"><h4>Частые вопросы</h4>
+<ul><li><b>Можно ли гражданам РФ на грант?</b> Türkiye Bursları принимает заявки из всех стран, включая Россию.</li><li><b>Нужен ли турецкий для заявки?</b> Нет. Для стипендиатов предусмотрен курс турецкого.</li><li><b>Можно ли подавать на грант и платно сразу?</b> Да, это снижает риск остаться без места.</li><li><b>Что выбирать при 85–90%?</b> Грант + частный вуз со скидкой + госвуз через TR-YÖS.</li></ul></div>`;
+function show(v){st.v=v;
+$("#list").style.display=v==="cat"&&st.id===null?"":"none";
+$("#guide").classList.toggle("on",v==="guide");
+$("#view").classList.toggle("on",v==="cat"&&st.id!==null);
+if(v==="guide"){$("#guide").innerHTML='<button class="back" id="bk">← Назад</button><div class="sh"><h3>Гид: гранты и поступление</h3></div>'+GUIDE;scrollTo({top:0})}}
+function openUni(id){const u=DB.find(x=>x.id===String(id));if(!u)return;st.id=id;st.v="cat";
+$("#guide").classList.remove("on");$("#list").style.display="none";const v=$("#view");v.classList.add("on");
+const p=CP[u.c];
+v.innerHTML=`<button class="back" id="bk">← К каталогу</button><div class="dh"><div class="bn" style="background-image:${p?`url('${wm(p,1600)}'),`:""}${FB}">${p?"":esc(ini(u))}</div><div class="in"><h2>${esc(u.n)}</h2><div class="tags"><span class="tag d">${ty(u)}</span><span class="tag">${u.c}${u.r?", "+u.r:""}</span>${u.k.map(k=>`<span class="tag">${D[k][0]}</span>`).join("")}</div></div></div><div class="uni"><div><div class="tabs" role="tablist">${TABS.map((t,i)=>`<button class="tab ${i?"":"on"}" role="tab" data-t="${i}">${t}</button>`).join("")}</div><div id="pn"></div></div>${facts(u)}</div>`;
+$("#pn").innerHTML=pane(u,0);scrollTo({top:0})}
+function closeUni(){st.id=null;$("#view").classList.remove("on");show("cat")}
+function goTo(x){st.id=null;$("#view").classList.remove("on");
+if(x==="guide"){show("guide");return}
+show("cat");const el={cat:"#catalog",dir:"#dirSec",calc:"#calcSec"}[x];setTimeout(()=>$(el).scrollIntoView({behavior:"smooth",block:"start"}),30)}
+document.addEventListener("click",e=>{
+const go=e.target.closest("[data-go]");if(go){goTo(go.dataset.go);return}
+if(e.target.closest("[data-cex]")){st.cex=!st.cex;drawCities();return}
+const cc=e.target.closest(".cc");if(cc){st.city=cc.dataset.city;drawChips();render();$("#catalog").scrollIntoView({behavior:"smooth",block:"start"});return}
+const b=e.target.closest(".brick");if(b){const k=b.dataset.b;st.cat=st.cat===k?"all":k;st.main=true;bricks();render();if(st.cat!=="all")$("#catalog").scrollIntoView({behavior:"smooth",block:"start"});return}
+if(e.target.closest("[data-main]")){st.main=!st.main;render();return}
+if(e.target.closest("[data-clr]")){st.cat="all";bricks();render();return}
+const c=e.target.closest(".chip");if(c&&c.dataset.k){st[c.dataset.k]=c.dataset.v;drawChips();render();return}
+const card=e.target.closest(".card");if(card){openUni(card.dataset.id);return}
+if(e.target.closest("#bk")||e.target.closest("#logo")){closeUni();return}
+const tb=e.target.closest(".tab");
+if(tb){const u=DB.find(x=>x.id===String(st.id));document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===tb));$("#pn").innerHTML=pane(u,+tb.dataset.t)}});
+$("#q").addEventListener("input",e=>{st.q=e.target.value;if(st.id!==null||st.v!=="cat"){st.id=null;$("#view").classList.remove("on");show("cat")}render()});
+["#gv","#gs","#ga"].forEach(s=>$(s).addEventListener("input",calc));
+$("#hbg").style.backgroundImage=`url('${wm("ist",2000)}')`;
+$("#glass").style.backgroundImage=`url('${wm("cap",600)}')`;
+stats();cities();bricks();drawChips();render();
+</script>
+</body>
+</html>
