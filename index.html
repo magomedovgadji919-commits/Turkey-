@@ -7,44 +7,47 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f3f4f6;--card:#fff;--tx:#17181a;--mu:#6c7279;--line:#e2e5e9;--ink:#111;--g:#1f9d63;--w:#b7791f;--r:#c53030;--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif}
+:root{--bg:#f3f4f6;--bgrgb:243,244,246;--card:#fff;--soft:#f7f8f9;--soft2:#e9ebee;--tx:#17181a;--tx2:#3c4046;--mu:#6c7279;--line:#e2e5e9;--ink:#111;--onink:#fff;--g:#1f9d63;--w:#b7791f;--r:#c53030;--wm1:#3b3f44;--wm2:rgba(59,63,68,.12);--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif}
+[data-theme=dark]{--bg:#0f1114;--bgrgb:15,17,20;--card:#181b20;--soft:#1e2228;--soft2:#262b33;--tx:#eceff3;--tx2:#c3c9d2;--mu:#8e96a3;--line:#2c323b;--ink:#eceff3;--onink:#111;--g:#4cc38a;--w:#e0a84a;--r:#f07575;--wm1:#e6e9ee;--wm2:rgba(230,233,238,.12)}
 *{box-sizing:border-box;margin:0}
 html,body{max-width:100%;overflow-x:hidden}
 html{scroll-behavior:smooth;scroll-padding-top:20px}
-body{background:var(--bg);color:var(--tx);font:15px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+body{background:var(--bg);color:var(--tx);font:15px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;transition:background .3s,color .3s}
 button,input,select{font:inherit;color:inherit}button{cursor:pointer}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .wrap{max-width:1240px;margin:0 auto;padding:0 20px;width:100%}
-.grid>*,.cities>*,.two>*,.rk>*,.calc>*,.sr>*,.bricks>*,.uni>*{min-width:0}
-.card h4,.card p,.pane,.brick b,.brick small,.cc b,.fr b,.dh h2,.sub{overflow-wrap:anywhere}
+.grid>*,.cities>*,.two>*,.rk>*,.tools2>*,.sr>*,.bricks>*,.uni>*{min-width:0}
+.card h4,.card p,.pane,.brick b,.brick small,.cc b,.fr b,.dh h2,.sub,.rt b{overflow-wrap:anywhere}
 /* верх */
 .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:18px 0}
-.nl{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-.nl button,.nr button{background:none;border:0;padding:4px 0;color:var(--tx);letter-spacing:inherit;text-transform:inherit;font-size:inherit}
-.nl button:hover,.nr button:hover{opacity:.55}
+.nl{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.nl button{background:none;border:0;border-bottom:1px solid transparent;padding:4px 0;letter-spacing:inherit;text-transform:inherit;font-size:inherit;color:var(--tx)}
+.nl button:hover{opacity:.55}.nl button.on{border-bottom-color:var(--tx)}
 .logo{font-family:var(--serif);font-size:24px;letter-spacing:.04em;cursor:pointer;white-space:nowrap}.logo b{font-weight:500;opacity:.55}
-.nr{display:flex;gap:16px;justify-content:flex-end;align-items:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;min-width:0}
-.search{width:220px;max-width:100%;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:99px;padding:7px 16px;font-size:13px;letter-spacing:0;text-transform:none}
+.nr{display:flex;gap:10px;justify-content:flex-end;align-items:center;min-width:0}
+.search{width:230px;max-width:100%;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:7px 16px;font-size:13px}
 .search:focus{outline:none;border-color:var(--ink)}
+.themebtn{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:15px;line-height:1}
+.themebtn:hover{border-color:var(--ink)}
 /* hero */
-.hero{position:relative;min-height:640px;border-radius:22px;overflow:hidden;background:#d5d9de;isolation:isolate}
+.hero{position:relative;min-height:640px;border-radius:22px;overflow:hidden;background:var(--soft2);isolation:isolate}
 .hbg{position:absolute;inset:0;background-size:cover;background-position:center 70%;z-index:-2}
-.hfog{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f3f4f6 0%,rgba(243,244,246,.88) 24%,rgba(243,244,246,.25) 58%,rgba(243,244,246,0) 100%),linear-gradient(90deg,rgba(243,244,246,.75) 0%,rgba(243,244,246,0) 55%)}
-.wm{font-family:var(--serif);font-weight:500;text-transform:uppercase;font-size:clamp(56px,16vw,230px);line-height:.92;letter-spacing:-.02em;text-align:center;padding-top:16px;background:linear-gradient(180deg,#3b3f44 25%,rgba(59,63,68,.12) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.wsub{margin-left:clamp(16px,5vw,60px);letter-spacing:.5em;font-size:13px;text-transform:uppercase;color:#3b3f44}
+.hfog{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(var(--bgrgb),1) 0%,rgba(var(--bgrgb),.88) 24%,rgba(var(--bgrgb),.25) 58%,rgba(var(--bgrgb),0) 100%),linear-gradient(90deg,rgba(var(--bgrgb),.75) 0%,rgba(var(--bgrgb),0) 55%)}
+.wm{font-family:var(--serif);font-weight:500;text-transform:uppercase;font-size:clamp(56px,16vw,230px);line-height:.92;letter-spacing:-.02em;text-align:center;padding-top:16px;background:linear-gradient(180deg,var(--wm1) 25%,var(--wm2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wsub{margin-left:clamp(16px,5vw,60px);letter-spacing:.5em;font-size:13px;text-transform:uppercase;color:var(--tx2)}
 .hl{position:absolute;left:clamp(16px,5vw,60px);bottom:90px;max-width:340px}
 .hl h2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,4vw,42px);line-height:1.08;text-transform:uppercase;letter-spacing:.01em}
-.hl p{color:#44494f;font-size:14px;margin:12px 0 20px}
-.pill{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:#fff;border:0;border-radius:99px;padding:10px 12px 10px 24px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
-.pill i{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(255,255,255,.4);border-radius:50%;font-style:normal;font-size:14px}
-.hr{position:absolute;right:clamp(16px,5vw,60px);top:46%;font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1.6;color:#44494f}
+.hl p{color:var(--tx2);font-size:14px;margin:12px 0 20px}
+.pill{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--onink);border:0;border-radius:99px;padding:10px 12px 10px 24px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.pill i{display:grid;place-items:center;width:30px;height:30px;border:1px solid currentColor;border-radius:50%;font-style:normal;font-size:14px;opacity:.7}
+.hr{position:absolute;right:clamp(16px,5vw,60px);top:46%;font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1.6;color:var(--tx2)}
 .hr span{display:block;margin-bottom:6px}
 .glass{position:absolute;right:clamp(16px,5vw,50px);bottom:70px;width:210px;height:126px;border-radius:16px;border:1px solid rgba(255,255,255,.75);background-size:cover;background-position:center;background-color:#8e949b;color:#fff;text-align:left;padding:14px;display:flex;align-items:flex-end;justify-content:space-between;font-size:11px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.18)}
 .glass::before{content:"";position:absolute;inset:0;border-radius:16px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.45))}
 .glass span,.glass i{position:relative}
-.glass i{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#fff;color:var(--ink);font-style:normal}
+.glass i{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#fff;color:#111;font-style:normal}
 .pg{position:absolute;left:clamp(16px,5vw,60px);bottom:26px;font-size:11px;color:var(--mu);display:flex;gap:18px}.pg b{color:var(--tx);border-bottom:1px solid var(--tx);font-weight:400;padding-bottom:4px}
-.sd{position:absolute;right:clamp(16px,5vw,60px);bottom:26px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#44494f}
+.sd{position:absolute;right:clamp(16px,5vw,60px);bottom:26px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx2)}
 /* сервисы */
 .sr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 150px;gap:0;align-items:center;padding:34px 8px}
 .sv{background:none;border:0;border-right:1px solid var(--line);text-align:left;padding:0 28px;transition:opacity .2s}
@@ -52,7 +55,7 @@ button,input,select{font:inherit;color:inherit}button{cursor:pointer}
 .sv small{display:block;color:var(--mu);font-size:11px;margin-bottom:10px}
 .sv b{display:block;font-family:var(--serif);font-size:19px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
 .sv span{color:var(--mu);font-size:13px}
-.all{justify-self:center;width:110px;height:110px;border-radius:50%;background:#e9ebee;border:0;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:grid;place-items:center;text-align:center;padding-top:8px}
+.all{justify-self:center;width:110px;height:110px;border-radius:50%;background:var(--soft2);border:0;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:grid;place-items:center;text-align:center;padding-top:8px}
 .all i{display:block;font-style:normal;font-size:20px;margin-bottom:6px}
 /* секции */
 .sect{background:var(--card);border-radius:22px;padding:34px 30px;margin-top:22px}
@@ -68,67 +71,102 @@ button,input,select{font:inherit;color:inherit}button{cursor:pointer}
 .cc b{display:block;font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
 .cc small{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
 .cc em{font-style:normal;font-size:11px;opacity:.8;text-align:right}
+.cc.all{width:100%;height:auto;border-radius:16px;background:var(--soft2);color:var(--tx);display:grid;place-items:center;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.cc.all::before{display:none}
 /* направления */
 .bricks{display:flex;flex-direction:column;gap:8px}
-.brick{display:flex;align-items:center;gap:18px;width:100%;text-align:left;background:#f7f8f9;border:1px solid var(--line);border-radius:14px;padding:16px 20px;transition:.2s}
+.brick{display:flex;align-items:center;gap:18px;width:100%;text-align:left;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px 20px;transition:.2s}
 .brick:hover{border-color:var(--ink)}
 .brick .bi{font-size:11px;color:var(--mu);width:22px;flex:none}
 .brick .bt{flex:1;min-width:0}.brick b{display:block;font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.03em}
 .brick small{color:var(--mu);font-size:12.5px;display:block}
 .brick .n{font-size:12px;color:var(--mu);text-align:right;flex:none}
 .brick .ar{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;flex:none}
-.brick.on{background:var(--ink);border-color:var(--ink);color:#fff}.brick.on small,.brick.on .n,.brick.on .bi{color:rgba(255,255,255,.65)}.brick.on .ar{border-color:rgba(255,255,255,.4)}
-/* калькулятор */
-.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:26px}
-.calc label{font-size:12px;color:var(--mu);display:block;margin-bottom:4px;letter-spacing:.04em}
-.calc input,.calc select{width:100%;background:#f7f8f9;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin-bottom:10px}
-.meter{height:8px;border-radius:99px;background:#e9ebee;overflow:hidden;margin:8px 0}.meter i{display:block;height:100%;width:0;background:var(--mu);transition:width .4s,background .4s}
-.res b.big{font-family:var(--serif);font-size:38px;font-weight:600}
+.brick.on{background:var(--ink);border-color:var(--ink);color:var(--onink)}.brick.on small,.brick.on .n,.brick.on .bi{color:inherit;opacity:.7}.brick.on .ar{border-color:currentColor}
 /* фильтры */
 .chips{display:flex;gap:8px;min-width:0}
 .chips.w{flex-wrap:wrap}
-.chip{background:#f7f8f9;border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:13px;color:var(--mu);transition:.2s}
-.chip:hover{border-color:var(--ink);color:var(--tx)}.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:13px;color:var(--mu);transition:.2s}
+.chip:hover{border-color:var(--ink);color:var(--tx)}.chip.on{background:var(--ink);border-color:var(--ink);color:var(--onink)}
 .filters{display:grid;gap:10px;margin:6px 0}
 .frow{display:flex;gap:10px;align-items:flex-start;min-width:0}
-.frow small{color:var(--mu);width:60px;flex:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding-top:9px}
+.frow small{color:var(--mu);width:70px;flex:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding-top:9px}
 .cityrow{display:flex;gap:8px;align-items:flex-start;flex:1;min-width:0}
 .cgrid{flex:1;min-width:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;grid-auto-rows:34px;max-height:34px;overflow:hidden;transition:max-height .3s}
 .cgrid.open{max-height:1400px}
 .cgrid .chip{width:100%;height:34px;padding:0 8px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}
-.cex{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#f7f8f9;font-size:16px;line-height:1;transition:transform .3s,border-color .2s}
+.cex{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--soft);font-size:16px;line-height:1;transition:transform .3s,border-color .2s}
 .cex:hover{border-color:var(--ink)}.cex.open{transform:rotate(180deg)}
+.sel,.fld input,.fld select{width:100%;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.sel{width:auto;max-width:100%}
 .count{color:var(--mu);font-size:13px;margin:14px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:14px}
-.card{background:#f7f8f9;border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:transform .2s,border-color .2s,background .2s}
-.card:hover{transform:translateY(-3px);border-color:var(--ink);background:#fff}
+.card{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:transform .2s,border-color .2s,background .2s}
+.card:hover{transform:translateY(-3px);border-color:var(--ink);background:var(--card)}
 .card h4{font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.2;letter-spacing:.01em}
 .card p{color:var(--mu);font-size:13.5px}
+.cf{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .tags{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
-.tag{font-size:11.5px;padding:2px 10px;border-radius:99px;background:#fff;color:var(--mu);border:1px solid var(--line);max-width:100%}.tag.d{background:var(--ink);border-color:var(--ink);color:#fff}.tag.g{color:var(--g);border-color:#bfe3d0}.tag.s{color:var(--w);border-color:#ecd9b0}
+.tag{font-size:11.5px;padding:2px 10px;border-radius:99px;background:var(--card);color:var(--mu);border:1px solid var(--line);max-width:100%}.tag.d{background:var(--ink);border-color:var(--ink);color:var(--onink)}.tag.g{color:var(--g);border-color:var(--g)}.tag.s{color:var(--w);border-color:var(--w)}
 .mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--mu)}.mini b{display:block;color:var(--tx);font-size:13.5px;font-weight:500;overflow-wrap:anywhere}
 .more{font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.acts{display:flex;gap:6px;flex:none}
+.ib{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:14px;line-height:1;flex:none}
+.ib:hover{border-color:var(--ink)}.ib.on{background:var(--ink);color:var(--onink);border-color:var(--ink)}
 .empty{grid-column:1/-1;text-align:center;color:var(--mu);padding:50px 0}
 /* страницы */
 .view{display:none;padding:18px 0 0}.view.on{display:block;animation:in .25s}
 @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.back{background:none;border:1px solid var(--line);border-radius:99px;padding:6px 16px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}.back:hover{border-color:var(--ink)}
+.top2{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.back{display:inline-block;text-decoration:none;color:inherit;background:none;border:1px solid var(--line);border-radius:99px;padding:6px 16px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.back:hover{border-color:var(--ink)}
+.view>.back{margin-bottom:14px}
 .dh{border-radius:22px;overflow:hidden;margin-bottom:16px;background:var(--card)}
-.bn{height:230px;background-size:cover;background-position:center;background-color:#d5d9de;display:grid;place-items:center;font-family:var(--serif);font-size:70px;color:rgba(0,0,0,.25)}
+.bn{height:230px;background-size:cover;background-position:center;background-color:var(--soft2);display:grid;place-items:center;font-family:var(--serif);font-size:70px;color:var(--mu)}
 .dh .in{padding:20px 26px}.dh h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4vw,38px);line-height:1.15;margin-bottom:10px}
 .uni{display:block}.side{display:none}
 .tabs{display:flex;flex-wrap:wrap;gap:2px 4px;border-bottom:1px solid var(--line);margin-bottom:16px}
 .tab{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;color:var(--mu);font-size:13.5px}.tab.on{color:var(--tx);border-color:var(--ink)}
 .pane{background:var(--card);border-radius:18px;padding:22px;margin-bottom:14px}
 .pane h4{margin:16px 0 6px;font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.02em}.pane h4:first-child{margin-top:0}
-.pane p,.pane li{color:#3c4046}.pane ul,.pane ol{padding-left:20px}.pane li{margin-bottom:4px}
+.pane p,.pane li{color:var(--tx2)}.pane ul,.pane ol{padding-left:20px}.pane li{margin-bottom:4px}
 .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.box{background:#f7f8f9;border:1px solid var(--line);border-radius:14px;padding:16px}.box.f{border-left:3px solid var(--ink)}.box.l{border-left:3px solid var(--w)}.box.g{border-left:3px solid var(--g)}.box.r{border-left:3px solid var(--r)}
+.tools2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px;align-items:start}
+.box{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px}.box.f{border-left:3px solid var(--ink)}.box.l{border-left:3px solid var(--w)}.box.g{border-left:3px solid var(--g)}.box.r{border-left:3px solid var(--r)}
 .rk{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;margin-bottom:12px}
-.rk div{background:#f7f8f9;border:1px solid var(--line);border-radius:12px;padding:12px}.rk small{color:var(--mu);display:block;font-size:12px}.rk b{font-family:var(--serif);font-size:22px;font-weight:600;overflow-wrap:anywhere}
+.rk div{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px}.rk small{color:var(--mu);display:block;font-size:12px}.rk b{font-family:var(--serif);font-size:22px;font-weight:600;overflow-wrap:anywhere}
 .fr{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}.fr:last-child{border:0}.fr span{color:var(--mu)}.fr b{font-weight:500;text-align:right}
 .note{color:var(--mu);font-size:12.5px;margin-top:12px}
-footer{color:var(--mu);font-size:12px;padding:30px 0 40px;overflow-wrap:anywhere}
+.fld label{font-size:12px;color:var(--mu);display:block;margin:10px 0 4px;letter-spacing:.04em}
+.meter{height:8px;border-radius:99px;background:var(--soft2);overflow:hidden;margin:8px 0}.meter i{display:block;height:100%;width:0;background:var(--mu);transition:width .4s,background .4s}
+.big{font-family:var(--serif);font-size:38px;font-weight:600}
+/* инструменты */
+.grp{margin-top:14px}.grp h5{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:8px;display:flex;justify-content:space-between;gap:8px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--soft);cursor:pointer;margin-bottom:8px}
+.row:hover{border-color:var(--ink)}
+.rt{min-width:0}.rt b{font-family:var(--serif);font-size:17px;display:block;font-weight:600}.rt small{color:var(--mu);font-size:12px}
+.cmp{width:100%;table-layout:fixed;border-collapse:collapse}
+.cmp th,.cmp td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px;text-align:left;overflow-wrap:anywhere}
+.cmp th:first-child,.cmp td:first-child{width:26%;color:var(--mu);font-weight:400}
+.cmp thead th{font-family:var(--serif);font-size:16px;font-weight:600}
+.cmp a{color:inherit}
+.cmp .x{border:0;background:none;color:var(--mu);font-size:14px;padding:0 4px}
+.tl{position:relative;padding-left:26px}.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.ev{position:relative;padding:0 0 18px}
+.ev::before{content:"";position:absolute;left:-24px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--card);border:2px solid var(--mu)}
+.ev.now::before{background:var(--g);border-color:var(--g)}.ev.next::before{background:var(--ink);border-color:var(--ink)}
+.ev b{display:block;font-weight:600}.ev small{color:var(--mu);display:block}
+.badge{display:inline-block;font-size:11px;padding:1px 10px;border-radius:99px;border:1px solid var(--line);margin-left:6px;vertical-align:middle;font-weight:400}
+.badge.now{color:var(--g);border-color:var(--g)}.badge.next{background:var(--ink);color:var(--onink);border-color:var(--ink)}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:14px;color:var(--tx2)}.ck input{margin-top:5px;accent-color:var(--ink)}
+.bar{height:8px;background:var(--soft2);border-radius:99px;overflow:hidden;margin:8px 0 4px}.bar i{display:block;height:100%;background:var(--g);width:0;transition:width .3s}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.cbar{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:30;display:flex;align-items:center;gap:10px;background:var(--ink);color:var(--onink);border-radius:99px;padding:8px 10px 8px 18px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 28px)}
+.cbar[hidden]{display:none}
+.cbar button{border:0;border-radius:99px;padding:6px 14px;font-size:12px}
+.cbar .b1{background:var(--onink);color:var(--ink)}.cbar .b2{background:none;color:inherit;opacity:.7}
+.toast{position:fixed;left:50%;bottom:74px;transform:translate(-50%,10px);background:var(--ink);color:var(--onink);padding:8px 16px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:40;max-width:calc(100% - 28px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+footer{color:var(--mu);font-size:12px;padding:30px 0 80px;overflow-wrap:anywhere}
 /* ПК-версия */
 @media(min-width:900px){
 .wrap{padding:0 28px}
@@ -146,11 +184,12 @@ footer{color:var(--mu);font-size:12px;padding:30px 0 40px;overflow-wrap:anywhere
 @media(max-width:899px){
 .nav{grid-template-columns:1fr;justify-items:center;gap:8px}.nr{justify-content:center;width:100%}.nl{order:3;justify-content:center}
 .sr{grid-template-columns:1fr;gap:18px}.sv{border-right:0;border-bottom:1px solid var(--line);padding:0 0 16px}
-.cities{grid-template-columns:1fr}.two,.calc{grid-template-columns:1fr}
+.cities{grid-template-columns:repeat(2,minmax(0,1fr))}.cc b{font-size:19px}.two,.tools2{grid-template-columns:1fr}
 .hr,.glass,.sd{display:none}.hl{bottom:60px}.hero{min-height:560px}
 .frow small{display:none}.sect{padding:24px 16px}.brick{padding:14px}
 .cgrid{gap:6px}.cgrid .chip{font-size:11px;padding:0 4px}
 .grid{grid-template-columns:minmax(0,1fr)}
+.cmp th,.cmp td{font-size:12px;padding:8px 4px}.cmp thead th{font-size:14px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -158,9 +197,10 @@ footer{color:var(--mu);font-size:12px;padding:30px 0 40px;overflow-wrap:anywhere
 <body>
 <div class="wrap">
 <header class="nav">
-<div class="nl"><button data-go="cat">Вузы</button><button data-go="dir">Направления</button><button data-go="calc">Шансы</button></div>
+<div class="nl"><button data-go="cat">Вузы</button><button data-go="dir">Направления</button><button data-go="tools">Инструменты</button><button data-go="guide">Гид</button></div>
 <div class="logo" id="logo">TURKVUZ <b>PRO</b></div>
-<div class="nr"><button data-go="guide">Гид</button><input class="search" id="q" type="search" placeholder="Поиск вуза или города" aria-label="Поиск"></div>
+<div class="nr"><input class="search" id="q" type="search" list="dl" placeholder="Поиск вуза или города" aria-label="Поиск"><button class="themebtn" id="theme" aria-label="Сменить тему" title="Тёмная / светлая тема">◐</button></div>
+<datalist id="dl"></datalist>
 </header>
 
 <main>
@@ -175,10 +215,10 @@ footer{color:var(--mu);font-size:12px;padding:30px 0 40px;overflow-wrap:anywhere
 </div>
 
 <div class="sr">
-<button class="sv" data-go="guide"><small>01</small><b>Грант</b><span>Türkiye Bursları: обучение, жильё и стипендия.</span></button>
-<button class="sv" data-go="guide"><small>02</small><b>Платное</b><span>TR-YÖS, SAT и частные вузы.</span></button>
-<button class="sv" data-go="calc"><small>03</small><b>Шансы</b><span>Оценка по баллу аттестата.</span></button>
-<button class="all" data-go="guide"><span><i>→</i>Все гиды</span></button>
+<button class="sv" data-go="tools:pick"><small>01</small><b>Подбор</b><span>Вузы под ваш балл и направление.</span></button>
+<button class="sv" data-go="guide"><small>02</small><b>Грант</b><span>Türkiye Bursları: условия и ориентиры.</span></button>
+<button class="sv" data-go="tools:bud"><small>03</small><b>Бюджет</b><span>Сколько стоит учёба и жизнь.</span></button>
+<button class="all" data-go="tools"><span><i>→</i>Все инструменты</span></button>
 </div>
 
 <div class="sect"><div class="sh"><h3>Популярные города</h3><button data-go="cat">Смотреть все →</button></div>
@@ -188,33 +228,33 @@ footer{color:var(--mu);font-size:12px;padding:30px 0 40px;overflow-wrap:anywhere
 <p class="sub">Нажмите на направление: каталог покажет только его вузы, профильные — первыми. Повторный клик сбрасывает фильтр.</p>
 <div class="bricks" id="bricks"></div></div>
 
-<div class="sect" id="calcSec"><div class="sh"><h3>Шансы на грант</h3></div>
-<p class="sub">Ориентировочная оценка по среднему баллу аттестата. Результат учитывается на вкладке «Грант и портфолио» у каждого вуза.</p>
-<div class="calc">
-<div><label for="gv">Средний балл аттестата</label><input id="gv" type="number" step="0.01" min="0" placeholder="например, 4.5">
-<label for="gs">Шкала</label><select id="gs"><option value="5">5-балльная (Россия, СНГ)</option><option value="100">Проценты (0–100)</option><option value="4">4-балльная (GPA)</option></select>
-<label for="ga">Возраст (на момент подачи)</label><input id="ga" type="number" min="14" max="40" placeholder="например, 17"></div>
-<div class="res" id="res"><span class="sub">Введите средний балл, чтобы увидеть оценку.</span></div></div></div>
-
 <div class="sect" id="catalog"><div class="sh"><h3>Каталог вузов</h3><span class="sub" id="stats" style="margin:0"></span></div>
 <div class="filters">
 <div class="frow"><small>Город</small><div class="cityrow" id="fcity"></div></div>
-<div class="frow"><small>Тип</small><div class="chips w" id="ft"></div></div></div>
+<div class="frow"><small>Тип</small><div class="chips w" id="ft"></div></div>
+<div class="frow"><small>Порядок</small><select class="sel" id="sort"><option value="def">По умолчанию</option><option value="name">По названию (A–Z)</option><option value="old">Сначала старые</option><option value="new">Сначала новые</option><option value="qs">По QS Europe</option><option value="price">Сначала дешевле (ориентир)</option></select></div></div>
 <div class="count" id="cnt"></div>
 <div class="grid" id="grid"></div></div>
 </section>
+<section id="tools" class="view"></section>
 <section id="guide" class="view"></section>
 <section id="view" class="view"></section>
 </main>
-<footer>Справочные данные. Список вузов (название, город, тип, год основания) взят из перечня Wikipedia по данным YÖK: в приложении 203 записи; по бюллетеню YÖK 2025–2026 в стране 208 высших учебных заведений и около 6,3 млн студентов. Места в QS World University Rankings 2026 и QS Europe 2026 приведены только для вузов, по которым нашлись публикации; «—» означает отсутствие проверенных данных. Число студентов приблизительное. Для вузов без числа студентов направления и язык ориентировочные. Правила Türkiye Bursları (минимум 70% для бакалавриата, 90% для медицины/стоматологии/фармации, возраст до 21 года) и часть тарифов (Bilkent, METU, Koç, Istinye) взяты с официальных страниц; остальные цены и «ориентиры» по гранту — оценки. Официальных проходных баллов по вузам для гранта не публикуется. Сроки, квоты и цены меняются каждый год: проверяйте сайты вузов, ÖSYM и turkiyeburslari.gov.tr. Фото: Wikimedia Commons (Galata Tower Panorama, Göreme National Park, Pamukkale); авторы и лицензии указаны на страницах файлов.</footer>
+<footer>Справочные данные. Список вузов (название, город, тип, год основания) взят из перечня Wikipedia по данным YÖK: в приложении 203 записи; по бюллетеню YÖK 2025–2026 в стране 208 высших учебных заведений и около 6,3 млн студентов. Места в QS World University Rankings 2026 и QS Europe 2026 приведены только для вузов, по которым нашлись публикации; «—» означает отсутствие проверенных данных. Число студентов приблизительное. Для вузов без числа студентов направления и язык ориентировочные. Подбор вузов, «ориентиры» по гранту и ценовые диапазоны — оценки, а не гарантии. Даты на вкладке «Сроки» взяты из цикла 2026 года и перенесены на ближайший будущий год: официальные даты нового цикла уточняйте. Правила Türkiye Bursları (минимум 70% для бакалавриата, 90% для медицины/стоматологии/фармации, возраст до 21 года) и часть тарифов (Bilkent, METU, Koç, Istinye) взяты с официальных страниц. Ссылки «Сайт вуза» ведут на главные страницы по известным адресам и не проверялись по одной. Проверяйте сайты вузов, ÖSYM и turkiyeburslari.gov.tr. Фото: Wikimedia Commons (Galata Tower Panorama, Göreme National Park, Pamukkale, Sumela Monastery, Yivli Minaret Mosque Antalya); авторы и лицензии указаны на страницах файлов.</footer>
 </div>
+<div class="cbar" id="cbar" hidden></div>
+<div class="toast" id="toast"></div>
 
 <script>
-// фото Турции: имена файлов на Wikimedia Commons (можно заменить на свои)
-const PH={ist:"20101106 Galata Tower Istanbul Turkey Panorama.jpg",cap:"Hot air ballons in the Göreme National Park.jpg",pam:"TR Pamukkale White Terraces asv2020-02 img16.jpg"};
+// ---------- хранилище и тема ----------
+const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem("tvp-"+k));return v==null?d:v}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem("tvp-"+k,JSON.stringify(v))}catch(e){}};
+document.documentElement.dataset.theme=ld("theme","light");
+// ---------- фото Турции (Wikimedia Commons; можно заменить на свои) ----------
+const PH={ist:"20101106 Galata Tower Istanbul Turkey Panorama.jpg",cap:"Hot air ballons in the Göreme National Park.jpg",pam:"TR Pamukkale White Terraces asv2020-02 img16.jpg",trb:"Sumela monastery in province of Trabzon, Turkey view from the road.JPG",ant:"Yivli Minaret Mosque Antalya.jpg"};
 const wm=(k,w)=>`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(PH[k])}?width=${w}`;
-const CP={"Стамбул":"ist","Кайсери":"cap","Денизли":"pam","Невшехир":"cap"};
-const CITYCARDS=[["Стамбул","ist","Мармара"],["Кайсери","cap","Каппадокия"],["Денизли","pam","Памуккале"]];
+const CP={"Стамбул":"ist","Кайсери":"cap","Денизли":"pam","Невшехир":"cap","Трабзон":"trb","Анталья":"ant"};
+const CITYCARDS=[["Стамбул","ist","Мармара"],["Кайсери","cap","Каппадокия"],["Денизли","pam","Памуккале"],["Трабзон","trb","Чёрное море"],["Анталья","ant","Средиземноморье"]];
 const D={
 it:["Компьютеры и IT","Программная инженерия, ИИ, кибербезопасность, data science"],
 eng:["Инженерия","Машиностроение, электроника, строительство, химия, материалы"],
@@ -273,6 +313,8 @@ const X=[["Middle East","Известные программы: Computer Enginee
 ["Mimar Sinan","Профильные программы: Painting, Sculpture, Ceramics, Architecture, Graphic Design; отбор через творческий экзамен."]];
 // место в мировом QS 2026 (0 — нет данных) и в QS Europe 2026
 const RK=[["Middle East",269,116],["Istanbul Technical",298,124],["Koç",323,143],["Boğaziçi",371,153],["Sabancı",404,148],["Bilkent",415,182],["Hacettepe",571,199],["Istanbul University=",0,226],["Ankara University=",697,244],["Yıldız",736,264],["Gazi University=",0,286],["Ege",0,367],["Gebze",0,375],["Marmara",0,391],["Istanbul Gelişim",0,441],["İzmir Institute",0,444],["Dokuz Eylül",0,453],["Abdullah",0,467],["Özyeğin",0,467],["Erciyes",0,471],["Anadolu",0,476],["Bahçeşehir",0,480],["Selçuk",0,495]];
+// главные страницы вузов (известные адреса; не проверялись по одной)
+const WEB=[["Middle East","metu.edu.tr"],["Bilkent","bilkent.edu.tr"],["Hacettepe","hacettepe.edu.tr"],["Gazi University=","gazi.edu.tr"],["Ankara University=","ankara.edu.tr"],["TOBB","etu.edu.tr"],["Başkent","baskent.edu.tr"],["Çankaya","cankaya.edu.tr"],["Atılım","atilim.edu.tr"],["Ankara Yıldırım","aybu.edu.tr"],["Ankara Social","asbu.edu.tr"],["Istanbul Technical","itu.edu.tr"],["Boğaziçi","boun.edu.tr"],["Koç","ku.edu.tr"],["Sabancı","sabanciuniv.edu"],["Istanbul University=","istanbul.edu.tr"],["Istanbul University-Cerrahpaşa","iuc.edu.tr"],["Marmara","marmara.edu.tr"],["Yıldız","yildiz.edu.tr"],["Galatasaray","gsu.edu.tr"],["Mimar Sinan","msgsu.edu.tr"],["Turkish-German","tau.edu.tr"],["Özyeğin","ozyegin.edu.tr"],["Acıbadem","acibadem.edu.tr"],["Bahçeşehir","bau.edu.tr"],["Kadir Has","khas.edu.tr"],["Istanbul Bilgi","bilgi.edu.tr"],["Yeditepe","yeditepe.edu.tr"],["Istanbul Medipol","medipol.edu.tr"],["Üsküdar","uskudar.edu.tr"],["Istinye","istinye.edu.tr"],["Istanbul Okan","okan.edu.tr"],["Istanbul Kültür","iku.edu.tr"],["Istanbul Aydın","aydin.edu.tr"],["Piri Reis","pirireis.edu.tr"],["Altınbaş","altinbas.edu.tr"],["Ege","ege.edu.tr"],["Dokuz Eylül","deu.edu.tr"],["İzmir Institute","iyte.edu.tr"],["İzmir University of Economics","ieu.edu.tr"],["Yaşar","yasar.edu.tr"],["Uludağ","uludag.edu.tr"],["Bursa Technical","btu.edu.tr"],["Akdeniz","akdeniz.edu.tr"],["Anadolu","anadolu.edu.tr"],["Eskişehir Technical","eskisehir.edu.tr"],["Eskişehir Osmangazi","ogu.edu.tr"],["Selçuk","selcuk.edu.tr"],["Necmettin Erbakan","erbakan.edu.tr"],["Erciyes","erciyes.edu.tr"],["Abdullah","agu.edu.tr"],["Karadeniz Technical","ktu.edu.tr"],["Ondokuz","omu.edu.tr"],["Atatürk University","atauni.edu.tr"],["Erzurum Technical","erzurum.edu.tr"],["Çukurova","cu.edu.tr"],["Gebze","gtu.edu.tr"],["Kocaeli University=","kocaeli.edu.tr"],["Sakarya University=","sakarya.edu.tr"],["Pamukkale","pau.edu.tr"],["Süleyman Demirel","sdu.edu.tr"],["Trakya","trakya.edu.tr"],["Fırat","firat.edu.tr"],["İnönü","inonu.edu.tr"],["Mersin University=","mersin.edu.tr"],["Dicle","dicle.edu.tr"],["Gaziantep University=","gantep.edu.tr"],["Çanakkale","comu.edu.tr"],["Muğla","mu.edu.tr"],["Tekirdağ","nku.edu.tr"],["Adnan Menderes","adu.edu.tr"],["Manisa Celal Bayar","cbu.edu.tr"]];
 // название|тип(1 гос,2 частный,3 военный)|город|направления (первое — главное)|студентов (прибл.)||язык|год|описание|стоимость|уровень конкурса
 const RAW=[
 "Middle East Technical University (ODTÜ/METU)|1|Анкара|it,eng,arc,sci,eco|27000||EN 100%|1956|Лидер технических наук с лесным кампусом и технопарком; вся учёба на английском.|$1 200/год на инженерии и архитектуре (тариф 2025–26)|S",
@@ -485,13 +527,21 @@ const RAW=[
 // годы основания приведены в соответствие с перечнем Wikipedia (данные YÖK)
 const FIX={"Bilkent":1985,"Başkent":1994,"Koç":1992,"Sabancı":1996,"Galatasaray":1994,"Turkish-German":2010,"Gebze":2014,"Anadolu":1958,"Gaziantep University":1987,"Dicle":1973,"Istanbul Aydın":2007,"Istanbul Kültür":1997,"Atılım":1997};
 const DB=RAW.map((s,i)=>{const a=s.split("|");const t=+a[1];const x=X.find(z=>mt(a[0],z[0]));const rk=RK.find(z=>mt(a[0],z[0]));const fx=Object.keys(FIX).find(k=>a[0].startsWith(k));const n=+a[4];return{id:String(i+1),n:a[0],t,c:a[2],r:REG[a[2]]||"",k:a[3].split(","),s:{toLocaleString:()=>n?"≈ "+n.toLocaleString("ru"):"—"},q:rk&&rk[1]?"#"+rk[1]:"—",qe:rk?rk[2]:0,l:a[6]||(t===2?"TR / EN":"TR"),y:fx?String(FIX[fx]):a[7],d:a[8]||(t===2?"Частный (фондовый) вуз, "+a[2]+".":t===3?"Военное или полицейское учебное заведение.":"Государственный вуз, "+a[2]+"."),f:a[9]||(t===2?FP:t===3?"Набор, как правило, только для граждан Турции — уточняйте":FS),tr:a[10]||"C",x:x?x[1]:(n?"":"Подтверждены название, город, тип и год основания; направления и язык ориентировочные — уточняйте на сайте вуза."),i}});
-const st={q:"",cat:"all",main:true,city:"all",type:"all",id:null,p:null,v:"cat",cex:false};
+// ---------- состояние ----------
+const st={q:"",cat:"all",main:true,city:"all",type:"all",sort:"def",id:null,p:null,v:"cat",cex:false,tt:"pick",plan:ld("plan",[]),cmp:[],chk:ld("chk",[]),
+pf:{v:"",sc:"5",age:"",dir:"all",tp:"all"},bf:{t:"",c:"USD",y:"4",l:"500",o:"",ru:"",re:"",rt:""}};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const pr=u=>u.t===2,ty=u=>pr(u)?"Частный":u.t===3?"Военное/спецучреждение":"Государственный";
 const short=n=>n.replace(/\s*\(.*\)/,"");
 const ini=u=>short(u.n).split(/[\s-]+/).filter(w=>/^[A-ZÇĞİÖŞÜ]/.test(w)).slice(0,2).map(w=>w[0]).join("");
 const FB="linear-gradient(135deg,#d9dde2,#eef0f2)";
+const inPlan=id=>st.plan.includes(id),inCmp=id=>st.cmp.includes(id);
+const site=u=>{const w=WEB.find(z=>mt(u.n,z[0]));return w?"https://www."+w[1]:null};
+const srch=u=>"https://www.google.com/search?q="+encodeURIComponent(u.n+" international students admission");
+const pk=u=>u.t===3?9:mt(u.n,"Middle East")?0:u.t===1?1:/^(Bilkent|Koç|Sabancı|Istinye)/.test(u.n)?3:2;
+let tmr;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tmr);tmr=setTimeout(()=>t.classList.remove("on"),2000)}
+// ---------- главная ----------
 function bricks(){$("#bricks").innerHTML=Object.entries(D).map(([k,v],i)=>{
 const all=DB.filter(u=>u.k.includes(k)).length,mn=DB.filter(u=>u.k[0]===k).length;
 return `<button class="brick ${st.cat===k?"on":""}" data-b="${k}" aria-pressed="${st.cat===k}"><span class="bi">${String(i+1).padStart(2,"0")}</span><span class="bt"><b>${v[0]}</b><small>${v[1]}</small></span><span class="n">${mn} профильных<br>${all} всего</span><span class="ar">→</span></button>`}).join("")}
@@ -505,36 +555,34 @@ if(st.cat!=="all"){if(!u.k.includes(st.cat))return false;if(st.main&&u.k[0]!==st
 if(st.city!=="all"&&u.c!==st.city)return false;
 if(st.type!=="all"&&String(u.t)!==st.type)return false;
 return !q||(u.n+" "+u.c+" "+u.r+" "+u.d+" "+u.k.map(k=>D[k][0]).join(" ")).toLowerCase().includes(q)}
-function cardHTML(u){return `<div class="card" data-id="${u.id}"><div class="tags">${st.cat!=="all"&&u.k[0]===st.cat?'<span class="tag d">★ Профильный вуз</span>':""}<span class="tag">${ty(u)}</span><span class="tag">${u.c}</span>${u.t===3?"":`<span class="tag g">Грант: ${TI[u.tr][1]}%+</span>`}</div><h4>${esc(u.n)}</h4><p>${esc(u.d)}</p><div class="tags">${u.k.map(k=>`<span class="tag">${D[k][0]}</span>`).join("")}</div><div class="mini"><span><b>${u.s.toLocaleString("ru")}</b>студентов</span><span><b>${u.y}</b>основан</span><span><b>${u.l.split(" ")[0]}</b>язык</span></div><span class="more">Подробнее →</span></div>`}
-function render(){let r=DB.filter(match);
-if(st.cat!=="all")r.sort((a,b)=>((b.k[0]===st.cat)-(a.k[0]===st.cat))||(TI[a.tr][2]-TI[b.tr][2]));
+function actBtns(u){return `<button class="ib ${inPlan(u.id)?"on":""}" data-pl="${u.id}" aria-label="В план" title="В мой план">${inPlan(u.id)?"★":"☆"}</button><button class="ib ${inCmp(u.id)?"on":""}" data-cm="${u.id}" aria-label="Сравнить" title="Добавить к сравнению">⇄</button>`}
+function cardHTML(u){return `<div class="card" data-id="${u.id}"><div class="tags">${st.cat!=="all"&&u.k[0]===st.cat?'<span class="tag d">★ Профильный вуз</span>':""}<span class="tag">${ty(u)}</span><span class="tag">${u.c}</span>${u.t===3?"":`<span class="tag g">Грант: ${TI[u.tr][1]}%+</span>`}</div><h4>${esc(u.n)}</h4><p>${esc(u.d)}</p><div class="tags">${u.k.map(k=>`<span class="tag">${D[k][0]}</span>`).join("")}</div><div class="mini"><span><b>${u.s.toLocaleString("ru")}</b>студентов</span><span><b>${u.y}</b>основан</span><span><b>${u.l.split(" ")[0]}</b>язык</span></div><div class="cf"><span class="more">Подробнее →</span><span class="acts">${actBtns(u)}</span></div></div>`}
+function sorter(){const nm=(a,b)=>a.n.localeCompare(b.n,"en"),s=st.sort;
+if(s==="name")return nm;
+if(s==="old")return (a,b)=>(+a.y)-(+b.y)||nm(a,b);
+if(s==="new")return (a,b)=>(+b.y)-(+a.y)||nm(a,b);
+if(s==="qs")return (a,b)=>((a.qe||999)-(b.qe||999))||nm(a,b);
+if(s==="price")return (a,b)=>(pk(a)-pk(b))||nm(a,b);
+return null}
+function render(){let r=DB.filter(match);const sf=sorter();
+if(sf)r.sort(sf);else if(st.cat!=="all")r.sort((a,b)=>((b.k[0]===st.cat)-(a.k[0]===st.cat))||(TI[a.tr][2]-TI[b.tr][2]));
 let h=`<span>Найдено: ${r.length} из ${DB.length}</span>`;
 if(st.city!=="all")h+=`<button class="chip on" data-k="city" data-v="all">Город: ${esc(st.city)} ×</button>`;
 if(st.cat!=="all")h+=`<span class="tag d">${D[st.cat][0]}</span><button class="chip ${st.main?"on":""}" data-main="1">${st.main?"★ Только профильные вузы":"Показаны все вузы с этим направлением"}</button><button class="chip" data-clr="1">Сбросить направление</button>`;
 $("#cnt").innerHTML=h;
 $("#grid").innerHTML=r.length?r.map(cardHTML).join(""):`<div class="empty">Ничего не найдено. Сбросьте фильтры или переключите «только профильные».</div>`}
 function cities(){$("#cities").innerHTML=CITYCARDS.map(([c,k,s],i)=>{const n=DB.filter(u=>u.c===c).length;
-return `<button class="cc" data-city="${c}" style="background-image:url('${wm(k,900)}')"><div><span><b>${c}</b><small>${s}</small></span><em>${n} вузов · 0${i+1}</em></div></button>`}).join("")}
+return `<button class="cc" data-city="${c}" style="background-image:url('${wm(k,900)}')"><div><span><b>${c}</b><small>${s}</small></span><em>${n} вузов<br>0${i+1}</em></div></button>`}).join("")+`<button class="cc all" data-go="cat"><span>Все города →</span></button>`}
 function stats(){$("#stats").textContent=`${DB.length} вузов · ${Object.keys(D).length} направлений · ${new Set(DB.map(u=>u.c)).size} городов`}
-function calc(){const v=parseFloat($("#gv").value),sc=+$("#gs").value,age=parseInt($("#ga").value);
-if(isNaN(v)){st.p=null;$("#res").innerHTML='<span class="sub">Введите средний балл, чтобы увидеть оценку.</span>';return}
-const p=Math.min(100,Math.max(0,v/sc*100)),r=Math.round(p*10)/10;st.p=p;
-let lab,col,txt;
-if(p<70){lab="Ниже минимума";col="var(--r)";txt="Для бакалавриата нужно не менее 70%. Рассмотрите платное обучение или вузовские стипендии."}
-else if(p<85){lab="Низкий шанс";col="var(--w)";txt="Допуск есть, но конкурс высокий. Усильте заявку: письмо, олимпиады, сертификаты."}
-else if(p<93){lab="Средний шанс";col="#5aa77a";txt="Хорошая база. Добавьте достижения и подготовьтесь к интервью."}
-else{lab="Высокий шанс";col="var(--g)";txt="Сильный балл. Победителей выбирает конкурс, гарантий нет, но это зона реальных шансов."}
-let ex=p>=90?"Для медицины, стоматологии и фармации порог 90% — вы его проходите.":"Для медицины, стоматологии и фармации порог 90% — пока не проходите.";
-if(!isNaN(age)&&age>=21)ex+=" Внимание: для бакалавриата нужно быть младше 21 года.";
-$("#res").innerHTML=`<b class="big">${r}%</b> <span style="color:${col};font-weight:600">· ${lab}</span><div class="meter"><i style="width:${p}%;background:${col}"></i></div><p>${txt}</p><p class="note">${ex} Перевод 5-балльной шкалы в проценты примерный (4,5 ≈ 90%). Итоговый балл переводит комиссия.</p>`}
+// ---------- карточка вуза ----------
 const TABS=["История и статус","Рейтинги","Язык обучения","Условия поступления","Стоимость и платное","Грант и портфолио"];
 function special(u){
 if(u.n.startsWith("Koç"))return `<li><b>Koç:</b> скидки 25 / 50 / 75 / 100% присуждаются по заслугам, отдельной заявки нет. Баллов, которые гарантируют стипендию, нет. Без SAT/ACT, IB или A-Level шансы заметно ниже. На медицине стипендий для иностранцев нет. Вуз публикует статистику баллов принятых ранее иностранцев — найдите её на сайте.</li>`;
 if(u.n.startsWith("Bilkent"))return `<li><b>Bilkent:</b> по данным сторонних источников, скидки 20–100% даются за успеваемость внутри вуза (GPA и рейтинг на программе), а не автоматически при поступлении. Уточните на странице стипендий вуза.</li>`;
 return ""}
-function facts(u){const rows=[["Тип",ty(u)],["Город",u.c+(u.r?", "+u.r:"")],["Основан",u.y],["Студентов",u.s.toLocaleString("ru")],["Язык",u.l],["QS World 2026",u.q],["QS Europe 2026",u.qe?"#"+u.qe:"—"],["Обучение",u.f]];
+function facts(u){const s=site(u);const rows=[["Тип",ty(u)],["Город",u.c+(u.r?", "+u.r:"")],["Основан",u.y],["Студентов",u.s.toLocaleString("ru")],["Язык",u.l],["QS World 2026",u.q],["QS Europe 2026",u.qe?"#"+u.qe:"—"],["Обучение",u.f]];
 if(u.t!==3)rows.push(["Ориентир для гранта",TI[u.tr][1]+"%+"]);
-return `<aside class="side"><div class="pane"><h4>Коротко</h4>${rows.map(r=>`<div class="fr"><span>${r[0]}</span><b>${esc(r[1])}</b></div>`).join("")}</div></aside>`}
+return `<aside class="side"><div class="pane"><h4>Коротко</h4>${rows.map(r=>`<div class="fr"><span>${r[0]}</span><b>${esc(r[1])}</b></div>`).join("")}<div class="fr"><span>Сайт</span><b>${s?`<a href="${s}" target="_blank" rel="noopener noreferrer">${s.replace("https://www.","")} ↗</a>`:"—"}</b></div></div></aside>`}
 function pane(u,t){
 if(t===0)return `<div class="pane"><h4>Описание</h4><p>${esc(u.d)}</p>${u.x?`<h4>Программы и факты</h4><p>${esc(u.x)}</p>`:""}<h4>Статус и кампус</h4><p>${ty(u)} университет, ${u.c}${u.r?" ("+u.r+")":""}. Основан в ${u.y} г.; студентов: ${u.s.toLocaleString("ru")}.</p><h4>Направления</h4><ul>${u.k.map((k,j)=>`<li><b>${j?"":"★ "}${D[k][0]}:</b> ${D[k][1]}${j?"":" (главный профиль вуза)"}</li>`).join("")}</ul><h4>Город</h4><p>${CI[u.c]||"Региональный город с доступными ценами и небольшим по сравнению с мегаполисами студенческим сообществом."}</p></div>`;
 if(t===1)return `<div class="pane"><div class="rk"><div><small>QS World 2026</small><b>${u.q}</b></div><div><small>QS Europe 2026</small><b>${u.qe?"#"+u.qe:"—"}</b></div><div><small>Студентов</small><b>${u.s.toLocaleString("ru")}</b></div></div><p>Места приведены по QS World University Rankings 2026 и региональному QS Europe 2026. «—» означает, что вуз не найден в публикациях, которые я проверял, а не что его нет в рейтинге.</p><p class="note">Свежие позиции смотрите на topuniversities.com и timeshighereducation.com; они обновляются каждый год. Число студентов приблизительное.</p></div>`;
@@ -544,13 +592,76 @@ if(t===4)return `<div class="pane"><div class="rk"><div><small>Обучение 
 <div class="two"><div class="box g"><h4>Бесплатно (грант)</h4><ul><li>Türkiye Bursları: обучение, общежитие, медстраховка и год турецкого — бесплатно.</li><li>Стипендия для бакалавриата ≈ 4 500 ₺/мес (по данным 2026).</li><li>Нужно 70%+ (90%+ для медицины), возраст до 21 года.</li></ul></div>
 <div class="box l"><h4>На платной основе</h4><ol><li>Выберите вуз и откройте страницу «International students» / квоты.</li><li>Выберите путь: аттестат, SAT, TR-YÖS или интервью.</li><li>Подайте онлайн-заявку и загрузите документы.</li><li>Получите письмо о зачислении и оплатите депозит или взнос.</li><li>Оформите студенческую визу, затем разрешение на проживание (ikamet).</li><li>Сдайте язык или пройдите Hazırlık/TÖMER.</li></ol></div></div>
 <h4>Скидки и стипендии</h4><p>${pr(u)?"Частные вузы обычно дают скидки 25–50–75–100% за высокий балл аттестата, SAT или экзамена. Пороги и размеры задаёт вуз.":"Государственные вузы почти не дают скидок, но их обучение дешевле. Главный шанс на бесплатное обучение — Türkiye Bursları."}</p>
-<p class="note">Цены в USD или ₺ меняются каждый год. Проверяйте тариф на сайте вуза.</p></div>`;
+<p class="note">Цены в USD или ₺ меняются каждый год. Проверяйте тариф на сайте вуза.</p><p style="margin-top:12px"><button class="chip" data-go="tools:bud">Посчитать общий бюджет →</button></p></div>`;
 if(u.t===3)return `<div class="pane"><h4>Грант и портфолио</h4><p>Для военных и полицейских академий грант Türkiye Bursları и платный набор иностранцев, как правило, не применяются: набор идёт для граждан Турции. Уточняйте условия на сайте учебного заведения.</p></div>`;
 const [lab,min]=TI[u.tr];let vd="";
 if(st.p!=null){const p=st.p;vd=p<70?`<div class="box r" style="margin-bottom:12px"><b>Ваш балл (${p.toFixed(1)}%) ниже допуска 70%.</b> Подача на грант невозможна.</div>`:p>=min?`<div class="box g" style="margin-bottom:12px"><b>Ваш балл (${p.toFixed(1)}%) в зоне ориентира.</b> Усильте заявку портфолио и письмом.</div>`:p>=min-5?`<div class="box l" style="margin-bottom:12px"><b>Ваш балл (${p.toFixed(1)}%) немного ниже ориентира.</b> Нужно сильное портфолио и интервью.</div>`:`<div class="box l" style="margin-bottom:12px"><b>Ваш балл (${p.toFixed(1)}%) заметно ниже ориентира.</b> Рассмотрите вузы с меньшим конкурсом или платный путь.</div>`}
 return `<div class="pane">${vd}<div class="rk"><div><small>Ориентир аттестата</small><b>${min}–100%</b></div><div><small>Конкурс</small><b style="font-size:16px">${lab}</b></div><div><small>Допуск</small><b style="font-size:16px">70% (90% — медицина)</b></div></div>
 <ul><li>Грант выдаёт программа Türkiye Bursları: вы подаёте заявку на грант, а вуз и специальность назначаются в процессе отбора. Отдельных проходных баллов по вузам программа не публикует.</li><li>В год выдаётся около 5 000 грантов; отбор идёт по оценкам, мотивационному письму и интервью.</li><li class="note">Ориентир — оценка по конкурсности вуза, а не официальная цифра.</li>${special(u)}</ul>
 <h4>Какое портфолио усиливает заявку</h4><ul>${u.k.map(k=>`<li><b>${D[k][0]}:</b> ${P[k]}</li>`).join("")}<li><b>Для всех:</b> конкретное мотивационное письмо (что вы будете делать с дипломом), рекомендации, сертификаты и грамоты.</li></ul></div>`}
+function openUni(id){const u=DB.find(x=>x.id===String(id));if(!u)return;st.id=id;st.v="cat";
+$("#guide").classList.remove("on");$("#tools").classList.remove("on");$("#list").style.display="none";const v=$("#view");v.classList.add("on");
+const p=CP[u.c],s=site(u);
+v.innerHTML=`<div class="top2"><button class="back" id="bk">← К каталогу</button><button class="back" id="plb" data-pl="${u.id}">${inPlan(u.id)?"★ В плане":"☆ В план"}</button><button class="back" id="cmb" data-cm="${u.id}">${inCmp(u.id)?"✓ В сравнении":"⇄ Сравнить"}</button>${s?`<a class="back" href="${s}" target="_blank" rel="noopener noreferrer">Сайт вуза ↗</a>`:""}<a class="back" href="${srch(u)}" target="_blank" rel="noopener noreferrer">${s?"Приём иностранцев ↗":"Найти сайт и приём ↗"}</a></div><div class="dh"><div class="bn" style="background-image:${p?`url('${wm(p,1600)}'),`:""}${FB}">${p?"":esc(ini(u))}</div><div class="in"><h2>${esc(u.n)}</h2><div class="tags"><span class="tag d">${ty(u)}</span><span class="tag">${u.c}${u.r?", "+u.r:""}</span>${u.k.map(k=>`<span class="tag">${D[k][0]}</span>`).join("")}</div></div></div><div class="uni"><div><div class="tabs" role="tablist">${TABS.map((t,i)=>`<button class="tab ${i?"":"on"}" role="tab" data-t="${i}">${t}</button>`).join("")}</div><div id="pn"></div></div>${facts(u)}</div>`;
+$("#pn").innerHTML=pane(u,0);scrollTo({top:0})}
+function uniBtns(){const pb=$("#plb"),cb=$("#cmb");if(pb&&st.id!==null)pb.textContent=inPlan(st.id)?"★ В плане":"☆ В план";if(cb&&st.id!==null)cb.textContent=inCmp(st.id)?"✓ В сравнении":"⇄ Сравнить"}
+function closeUni(){st.id=null;$("#view").classList.remove("on");show("cat")}
+// ---------- инструменты ----------
+const rowHTML=(u,x)=>`<div class="row" data-id="${u.id}"><div class="rt"><b>${esc(short(u.n))}</b><small>${u.c} · ${ty(u)}${x?" · "+x:""}</small></div><div class="acts">${actBtns(u)}</div></div>`;
+function pickPane(){const d=Object.entries(D).filter(([k])=>k!=="mil");
+return `<div class="tools2" id="pickForm"><div class="pane"><h4>Ваши данные</h4><div class="fld"><label for="pv">Средний балл аттестата</label><input id="pv" type="number" step="0.01" min="0" placeholder="например, 4.5"><label for="ps">Шкала</label><select id="ps"><option value="5">5-балльная (Россия, СНГ)</option><option value="100">Проценты (0–100)</option><option value="4">4-балльная (GPA)</option></select><label for="pa">Возраст (на момент подачи)</label><input id="pa" type="number" min="14" max="40" placeholder="например, 17"><label for="pd">Направление</label><select id="pd"><option value="all">Любое</option>${d.map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join("")}</select><label for="pt">Тип вуза</label><select id="pt"><option value="all">Любой</option><option value="1">Государственный</option><option value="2">Частный</option></select></div></div><div class="pane" id="pres"></div></div>`}
+function fillPick(){const f=st.pf;$("#pv").value=f.v;$("#ps").value=f.sc;$("#pa").value=f.age;$("#pd").value=f.dir;$("#pt").value=f.tp;pickCalc()}
+function pickCalc(){const f=st.pf;f.v=$("#pv").value;f.sc=$("#ps").value;f.age=$("#pa").value;f.dir=$("#pd").value;f.tp=$("#pt").value;
+const v=parseFloat(f.v),sc=+f.sc,age=parseInt(f.age);const p=isNaN(v)?null:Math.min(100,Math.max(0,v/sc*100));st.p=p;
+let head;
+if(p==null)head='<p class="sub" style="margin:0 0 6px">Введите средний балл — подбор учтёт его. Без балла вузы делятся только по конкурсности.</p>';
+else{let lab,col,txt;
+if(p<70){lab="Ниже минимума";col="var(--r)";txt="Для гранта нужно не менее 70%. Ниже показаны вузы по конкурсности для платного пути."}
+else if(p<85){lab="Низкий шанс на грант";col="var(--w)";txt="Допуск есть, но конкурс высокий. Усильте заявку: письмо, олимпиады, сертификаты."}
+else if(p<93){lab="Средний шанс на грант";col="var(--g)";txt="Хорошая база. Добавьте достижения и подготовьтесь к интервью."}
+else{lab="Высокий шанс на грант";col="var(--g)";txt="Сильный балл. Победителей выбирает конкурс, гарантий нет."}
+let ex=p>=90?"Для медицины, стоматологии и фармации порог 90% — вы его проходите.":"Для медицины, стоматологии и фармации порог 90% — пока не проходите.";
+if(!isNaN(age)&&age>=21)ex+=" Внимание: для бакалавриата нужно быть младше 21 года.";
+head=`<b class="big">${Math.round(p*10)/10}%</b> <span style="color:${col};font-weight:600">· ${lab}</span><div class="meter"><i style="width:${p}%;background:${col}"></i></div><p>${txt}</p><p class="note" style="margin-top:4px">${ex} Перевод 5-балльной шкалы в проценты примерный (4,5 ≈ 90%).</p>`}
+const c=DB.filter(u=>u.t!==3&&(f.dir==="all"||u.k.includes(f.dir))&&(f.tp==="all"||String(u.t)===f.tp));
+const use=p!=null&&p>=70;
+const grp=u=>{if(!use)return u.tr==="S"||u.tr==="A"?0:u.tr==="B"?1:2;const d=p-TI[u.tr][1];return d<-2?0:d<6?1:2};
+const g=[[],[],[]];c.forEach(u=>g[grp(u)].push(u));
+const key=(a,b)=>(((f.dir!=="all"&&b.k[0]===f.dir)?1:0)-((f.dir!=="all"&&a.k[0]===f.dir)?1:0))||TI[a.tr][2]-TI[b.tr][2]||((a.qe||999)-(b.qe||999))||a.n.localeCompare(b.n,"en");
+const T=["Амбициозные","Реалистичные","Надёжные"];
+$("#pres").innerHTML=head+`<div class="note" style="margin:10px 0 0">Подбор — оценка по конкурсности вуза и вашему баллу, а не гарантия.</div>`+g.map((a,i)=>{a.sort(key);return `<div class="grp"><h5><span>${T[i]}</span><span>всего ${a.length}</span></h5>${a.slice(0,3).map(u=>rowHTML(u,TI[u.tr][1]+"%+")).join("")||'<p class="sub" style="margin:0">Нет вузов в этой группе.</p>'}</div>`}).join("")}
+function cmpPane(){const l=st.cmp.map(id=>DB.find(u=>u.id===id)).filter(Boolean);
+if(!l.length)return `<div class="pane"><h4>Сравнение вузов</h4><p>Пока пусто. Нажмите ⇄ на карточке вуза (до трёх вузов), и они появятся здесь в одной таблице.</p></div>`;
+const R=[["Тип",u=>ty(u)],["Город",u=>u.c],["Основан",u=>u.y],["Студентов",u=>u.s.toLocaleString("ru")],["Язык",u=>u.l],["QS World 2026",u=>u.q],["QS Europe 2026",u=>u.qe?"#"+u.qe:"—"],["Обучение",u=>u.f],["Ориентир гранта",u=>u.t===3?"—":TI[u.tr][1]+"%+"],["Главное направление",u=>D[u.k[0]][0]],["Все направления",u=>u.k.map(k=>D[k][0]).join(", ")],["Сайт",u=>{const s=site(u);return s?`<a href="${s}" target="_blank" rel="noopener noreferrer">открыть ↗</a>`:`<a href="${srch(u)}" target="_blank" rel="noopener noreferrer">найти ↗</a>`}]];
+return `<div class="pane"><table class="cmp"><thead><tr><th></th>${l.map(u=>`<th>${esc(short(u.n))} <button class="x" data-cm="${u.id}" aria-label="Убрать">×</button></th>`).join("")}</tr></thead><tbody>${R.map(r=>`<tr><td>${r[0]}</td>${l.map(u=>`<td>${r[0]==="Сайт"?r[1](u):esc(r[1](u))}</td>`).join("")}</tr>`).join("")}</tbody></table><p style="margin-top:12px"><button class="chip" data-clrcmp="1">Очистить сравнение</button></p></div>`}
+const CHK=[["Документы",[["d1","Аттестат с приложением (оригинал)"],["d2","Перевод аттестата"],["d3","Апостиль (если требует вуз)"],["d4","Действующий загранпаспорт и фото"],["d5","Мотивационное письмо и рекомендации"],["d6","Сертификаты, грамоты, портфолио"],["d7","Языковой сертификат (TOEFL / IELTS / TÖMER) или план Hazırlık"]]],["Экзамены и заявки",[["e1","Заявка на Türkiye Bursları (янв–фев)"],["e2","Регистрация на TR-YÖS"],["e3","Подготовка к TR-YÖS / SAT / тесту вуза"],["e4","Заявки в выбранные вузы"]]],["После зачисления",[["p1","Письмо о зачислении (acceptance letter)"],["p2","Оплата депозита или взноса"],["p3","Студенческая виза"],["p4","Медицинская страховка"],["p5","Жильё"],["p6","Разрешение на проживание (ikamet) после приезда"]]]];
+const CKN=CHK.reduce((s,g)=>s+g[1].length,0);
+function ckProg(){const n=st.chk.length;const t=$("#ckp"),b=$("#ckb");if(t)t.textContent=`Готово ${n} из ${CKN}`;if(b)b.style.width=(n/CKN*100)+"%"}
+function planPane(){const l=st.plan.map(id=>DB.find(u=>u.id===id)).filter(Boolean);
+return `<div class="tools2"><div class="pane"><h4>Мои вузы</h4>${l.length?l.map(u=>rowHTML(u,"")).join("")+`<p style="margin-top:8px"><button class="chip" data-clrplan="1">Очистить план</button></p>`:'<p>Пока пусто. Нажмите ☆ на карточке вуза, чтобы добавить его сюда.</p>'}</div><div class="pane"><h4>Чек-лист поступления</h4><div id="ckp" class="note" style="margin:0"></div><div class="bar"><i id="ckb"></i></div>${CHK.map(g=>`<div class="grp"><h5><span>${g[0]}</span></h5>${g[1].map(([id,t])=>`<label class="ck"><input type="checkbox" data-ck="${id}" ${st.chk.includes(id)?"checked":""}><span>${t}</span></label>`).join("")}</div>`).join("")}<p class="note">План и чек-лист сохраняются в браузере.</p></div></div>`}
+const EV=[["Заявки на Türkiye Bursları",1,10,2,20,"Онлайн-подача, бесплатно. Даты — по циклу 2026."],["Регистрация на TR-YÖS (ÖSYM)",1,14,2,3,"Заявки на экзамен для иностранных абитуриентов."],["Экзамен TR-YÖS",4,12,4,12,"Результаты приходят в мае."],["Результаты TR-YÖS",5,7,5,7,"После этого открываются окна приёма вузов."],["Основной приём в вузы (пример)",5,22,5,22,"В 2026 г. у одного из вузов приём открылся 22 мая; у остальных сроки свои."],["Дополнительный приём (пример)",8,26,9,4,"Пример 2026 г.: 26 августа – 4 сентября."]];
+const MS=["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
+function dlPane(){const now=new Date();
+const L=EV.map(e=>{let o=null;for(let y=now.getFullYear();y<=now.getFullYear()+1&&!o;y++){const s=new Date(y,e[1]-1,e[2]),f=new Date(y,e[3]-1,e[4],23,59,59);if(f>=now)o={s,f,y}}return{e,...o}}).sort((a,b)=>a.s-b.s);
+let nx=false;
+return `<div class="pane"><h4>Календарь сроков</h4><p class="note" style="margin:0 0 14px">Даты нового цикла ещё не объявлены. Показаны даты цикла 2026 года, перенесённые на ближайший будущий год: используйте как ориентир и проверяйте на официальных сайтах.</p><div class="tl">${L.map(x=>{const e=x.e,d=Math.ceil((x.s-now)/864e5),isNow=x.s<=now&&now<=x.f;let cls="",bd="";
+if(isNow){cls="now";bd='<span class="badge now">идёт сейчас</span>'}else if(!nx){nx=true;cls="next";bd=`<span class="badge next">ближайшее · через ${d} дн.</span>`}else bd=`<span class="badge">через ${d} дн.</span>`;
+const rng=(e[1]===e[3]&&e[2]===e[4])?`${e[2]} ${MS[e[1]-1]} ${x.y}`:`${e[2]} ${MS[e[1]-1]} – ${e[4]} ${MS[e[3]-1]} ${x.y}`;
+return `<div class="ev ${cls}"><b>${e[0]}${bd}</b><small>${rng}</small><small>${e[5]}</small></div>`}).join("")}</div></div>`}
+function budPane(){return `<div class="tools2" id="budForm"><div class="pane"><h4>Параметры</h4><div class="presets"><button class="chip" data-pre="grant">Грант</button><button class="chip" data-pre="state">Госвуз (ориентир)</button><button class="chip" data-pre="private">Частный (ориентир)</button></div><div class="fld"><label for="bt">Обучение в год</label><input id="bt" type="number" min="0" placeholder="например, 3000"><label for="bc">Валюта обучения</label><select id="bc"><option>USD</option><option>EUR</option><option>TRY</option><option>RUB</option></select><label for="by">Лет обучения</label><input id="by" type="number" min="1" max="8"><label for="bl">Жильё и питание, € в месяц</label><input id="bl" type="number" min="0"><label for="bo">Разовые расходы, € (виза, ikamet, страховка, переезд)</label><input id="bo" type="number" min="0" placeholder="0"><label>Курсы к рублю (введите сами)</label><input id="rU" type="number" step="0.01" placeholder="1 USD = ? ₽"><input id="rE" type="number" step="0.01" placeholder="1 EUR = ? ₽" style="margin-top:6px"><input id="rT" type="number" step="0.01" placeholder="1 TRY = ? ₽" style="margin-top:6px"></div></div><div class="pane" id="bres"></div></div>`}
+function fillBud(){const b=st.bf;$("#bt").value=b.t;$("#bc").value=b.c;$("#by").value=b.y;$("#bl").value=b.l;$("#bo").value=b.o;$("#rU").value=b.ru;$("#rE").value=b.re;$("#rT").value=b.rt;budCalc()}
+function budCalc(){const b=st.bf;b.t=$("#bt").value;b.c=$("#bc").value;b.y=$("#by").value;b.l=$("#bl").value;b.o=$("#bo").value;b.ru=$("#rU").value;b.re=$("#rE").value;b.rt=$("#rT").value;
+const t=parseFloat(b.t)||0,y=Math.max(1,parseInt(b.y)||1),l=parseFloat(b.l)||0,o=parseFloat(b.o)||0;
+const tu=t*y,li=l*12*y,ot=li+o;const R={USD:parseFloat(b.ru),EUR:parseFloat(b.re),TRY:parseFloat(b.rt),RUB:1};
+const f=n=>Math.round(n).toLocaleString("ru");
+let rub=null;const okT=tu===0||R[b.c]>0,okE=ot===0||R.EUR>0;if(okT&&okE)rub=tu*(R[b.c]||0)+ot*(R.EUR||0);
+$("#bres").innerHTML=`<h4>Расчёт</h4><div class="fr"><span>Обучение за год</span><b>${f(t)} ${b.c}</b></div><div class="fr"><span>Обучение за ${y} лет</span><b>${f(tu)} ${b.c}</b></div><div class="fr"><span>Жильё и питание за ${y} лет</span><b>${f(li)} EUR</b></div><div class="fr"><span>Разовые расходы</span><b>${f(o)} EUR</b></div><div class="fr"><span>Итого в валютах</span><b>${f(tu)} ${b.c} + ${f(ot)} EUR</b></div><div class="fr"><span>Итого в рублях</span><b>${rub==null?"введите курсы":f(rub)+" ₽"}</b></div>${rub!=null?`<div class="fr"><span>В среднем за год</span><b>${f(rub/y)} ₽</b></div>`:""}<p class="note">Жильё и питание ≈ 400–650 € в месяц — диапазон из сторонних источников. Пресеты «госвуз» и «частный» — середины ориентировочных диапазонов цен, а не тарифы конкретного вуза. У стипендиатов Türkiye Bursları обучение и общежитие бесплатны, платится в основном питание и личные расходы.</p>`}
+const BP={grant:{t:"0",c:"USD"},state:{t:"3000",c:"USD"},private:{t:"15000",c:"USD"}};
+function drawTools(){const T=[["pick","Подбор"],["cmp","Сравнение"+(st.cmp.length?" ("+st.cmp.length+")":"")],["plan","Мой план"+(st.plan.length?" ("+st.plan.length+")":"")],["dl","Сроки"],["bud","Бюджет"]];
+$("#tools").innerHTML=`<button class="back" id="bk">← К каталогу</button><div class="sh"><h3>Инструменты</h3></div><div class="tabs">${T.map(([k,l])=>`<button class="tab ${st.tt===k?"on":""}" data-tt="${k}">${l}</button>`).join("")}</div><div id="tp"></div>`;
+$("#tp").innerHTML={pick:pickPane,cmp:cmpPane,plan:planPane,dl:dlPane,bud:budPane}[st.tt]();
+if(st.tt==="pick")fillPick();if(st.tt==="bud")fillBud();if(st.tt==="plan")ckProg()}
+// ---------- гид ----------
 const GUIDE=`<div class="pane"><h4>Грант Türkiye Bursları: всё по порядку</h4>
 <ul><li><b>Что покрывает:</b> обучение, общежитие в госвузе, медицинскую страховку, годичный курс турецкого и ежемесячную стипендию (для бакалавриата ≈ 4 500 ₺, данные 2026 г.).</li>
 <li><b>Кто может:</b> бакалавриат — не менее 70% по аттестату (медицина, стоматология, фармация — 90%), возраст до 21 года. Подача бесплатна, письмо из вуза не нужно.</li>
@@ -572,41 +683,57 @@ const GUIDE=`<div class="pane"><h4>Грант Türkiye Bursları: всё по п
 <li>Вузы часто принимают заявки с весны до конца лета, сроки у каждого свои.</li></ul></div>
 <div class="pane"><h4>Документы, виза, проживание</h4>
 <ol><li>Подготовьте аттестат с переводом и апостилем (если требует вуз), паспорт, фото.</li><li>Получите письмо о зачислении (acceptance letter).</li><li>Оформите студенческую визу в консульстве по письму.</li><li>После приезда оформите разрешение на проживание (ikamet) и страховку.</li><li>Сдайте языковой тест или пройдите Hazırlık/TÖMER.</li></ol>
-<p class="note">Перед подачей всегда проверяйте актуальные требования на сайте вуза и консульства.</p></div>
+<p class="note">Перед подачей всегда проверяйте актуальные требования на сайте вуза и консульства. Список дел с галочками — в «Инструменты → Мой план».</p></div>
 <div class="pane"><h4>Жизнь и бюджет</h4>
 <ul><li>Жильё и питание: ≈ 400–650 €/мес для иностранного студента (по сторонним данным).</li><li>Самые дорогие города — Стамбул и курортные регионы; дешевле — Анкара, Конья, Эрзурум.</li><li>Общежитие в госвузе для стипендиатов Bursları бесплатно.</li></ul></div>
 <div class="pane"><h4>План на год (ориентировочно)</h4>
 <ul><li><b>Январь–февраль:</b> заявка на Türkiye Bursları; регистрация на TR-YÖS.</li><li><b>Март–апрель:</b> подготовка к YÖS/SAT; интервью по гранту.</li><li><b>Май–июнь:</b> результаты, подача в госвузы и частные вузы.</li><li><b>Июль–август:</b> стипендии, оплата депозита, документы на визу.</li><li><b>Август–сентябрь:</b> дополнительный приём; виза и приезд.</li></ul></div>
 <div class="pane"><h4>Частые вопросы</h4>
 <ul><li><b>Можно ли гражданам РФ на грант?</b> Türkiye Bursları принимает заявки из всех стран, включая Россию.</li><li><b>Нужен ли турецкий для заявки?</b> Нет. Для стипендиатов предусмотрен курс турецкого.</li><li><b>Можно ли подавать на грант и платно сразу?</b> Да, это снижает риск остаться без места.</li><li><b>Что выбирать при 85–90%?</b> Грант + частный вуз со скидкой + госвуз через TR-YÖS.</li></ul></div>`;
+// ---------- навигация ----------
+function bar(){const b=$("#cbar");if(!st.cmp.length||(st.v==="tools"&&st.tt==="cmp")){b.hidden=true;return}
+b.hidden=false;b.innerHTML=`<span>Сравнение: ${st.cmp.length}/3</span><button class="b1" data-go="tools:cmp">Открыть</button><button class="b2" data-clrcmp="1">Очистить</button>`}
 function show(v){st.v=v;
 $("#list").style.display=v==="cat"&&st.id===null?"":"none";
 $("#guide").classList.toggle("on",v==="guide");
+$("#tools").classList.toggle("on",v==="tools");
 $("#view").classList.toggle("on",v==="cat"&&st.id!==null);
-if(v==="guide"){$("#guide").innerHTML='<button class="back" id="bk">← Назад</button><div class="sh"><h3>Гид: гранты и поступление</h3></div>'+GUIDE;scrollTo({top:0})}}
-function openUni(id){const u=DB.find(x=>x.id===String(id));if(!u)return;st.id=id;st.v="cat";
-$("#guide").classList.remove("on");$("#list").style.display="none";const v=$("#view");v.classList.add("on");
-const p=CP[u.c];
-v.innerHTML=`<button class="back" id="bk">← К каталогу</button><div class="dh"><div class="bn" style="background-image:${p?`url('${wm(p,1600)}'),`:""}${FB}">${p?"":esc(ini(u))}</div><div class="in"><h2>${esc(u.n)}</h2><div class="tags"><span class="tag d">${ty(u)}</span><span class="tag">${u.c}${u.r?", "+u.r:""}</span>${u.k.map(k=>`<span class="tag">${D[k][0]}</span>`).join("")}</div></div></div><div class="uni"><div><div class="tabs" role="tablist">${TABS.map((t,i)=>`<button class="tab ${i?"":"on"}" role="tab" data-t="${i}">${t}</button>`).join("")}</div><div id="pn"></div></div>${facts(u)}</div>`;
-$("#pn").innerHTML=pane(u,0);scrollTo({top:0})}
-function closeUni(){st.id=null;$("#view").classList.remove("on");show("cat")}
-function goTo(x){st.id=null;$("#view").classList.remove("on");
-if(x==="guide"){show("guide");return}
-show("cat");const el={cat:"#catalog",dir:"#dirSec",calc:"#calcSec"}[x];setTimeout(()=>$(el).scrollIntoView({behavior:"smooth",block:"start"}),30)}
+document.querySelectorAll(".nl button").forEach(b=>b.classList.toggle("on",b.dataset.go===v));
+if(v==="guide"){$("#guide").innerHTML='<button class="back" id="bk">← Назад</button><div class="sh"><h3>Гид: гранты и поступление</h3></div>'+GUIDE;scrollTo({top:0})}
+if(v==="tools")drawTools();
+bar()}
+function goTo(x){st.id=null;$("#view").classList.remove("on");const [a,b]=x.split(":");
+if(a==="guide"){show("guide");return}
+if(a==="tools"){if(b)st.tt=b;show("tools");scrollTo({top:0});return}
+show("cat");const el={cat:"#catalog",dir:"#dirSec"}[a];if(el)setTimeout(()=>$(el).scrollIntoView({behavior:"smooth",block:"start"}),30)}
+function refresh(){render();bar();if(st.v==="tools")drawTools();if(st.id!==null)uniBtns()}
+// ---------- события ----------
 document.addEventListener("click",e=>{
 const go=e.target.closest("[data-go]");if(go){goTo(go.dataset.go);return}
+const pl=e.target.closest("[data-pl]");if(pl){const id=pl.dataset.pl;st.plan=inPlan(id)?st.plan.filter(x=>x!==id):[...st.plan,id];sv("plan",st.plan);toast(inPlan(id)?"Добавлено в план":"Убрано из плана");refresh();return}
+const cm=e.target.closest("[data-cm]");if(cm){const id=cm.dataset.cm;if(inCmp(id))st.cmp=st.cmp.filter(x=>x!==id);else if(st.cmp.length>=3){toast("Можно сравнить не больше 3 вузов");return}else{st.cmp=[...st.cmp,id];toast("Добавлено к сравнению")}refresh();return}
+const tt=e.target.closest("[data-tt]");if(tt){st.tt=tt.dataset.tt;drawTools();bar();return}
+const pre=e.target.closest("[data-pre]");if(pre){Object.assign(st.bf,BP[pre.dataset.pre]);fillBud();return}
+if(e.target.closest("[data-clrcmp]")){st.cmp=[];refresh();return}
+if(e.target.closest("[data-clrplan]")){st.plan=[];sv("plan",st.plan);refresh();return}
+if(e.target.closest("#theme")){const t=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=t;sv("theme",t);return}
 if(e.target.closest("[data-cex]")){st.cex=!st.cex;drawCities();return}
-const cc=e.target.closest(".cc");if(cc){st.city=cc.dataset.city;drawChips();render();$("#catalog").scrollIntoView({behavior:"smooth",block:"start"});return}
+const cc=e.target.closest(".cc[data-city]");if(cc){st.city=cc.dataset.city;drawChips();render();$("#catalog").scrollIntoView({behavior:"smooth",block:"start"});return}
 const b=e.target.closest(".brick");if(b){const k=b.dataset.b;st.cat=st.cat===k?"all":k;st.main=true;bricks();render();if(st.cat!=="all")$("#catalog").scrollIntoView({behavior:"smooth",block:"start"});return}
 if(e.target.closest("[data-main]")){st.main=!st.main;render();return}
 if(e.target.closest("[data-clr]")){st.cat="all";bricks();render();return}
 const c=e.target.closest(".chip");if(c&&c.dataset.k){st[c.dataset.k]=c.dataset.v;drawChips();render();return}
-const card=e.target.closest(".card");if(card){openUni(card.dataset.id);return}
+const card=e.target.closest(".card,.row");if(card){openUni(card.dataset.id);return}
 if(e.target.closest("#bk")||e.target.closest("#logo")){closeUni();return}
-const tb=e.target.closest(".tab");
-if(tb){const u=DB.find(x=>x.id===String(st.id));document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===tb));$("#pn").innerHTML=pane(u,+tb.dataset.t)}});
+const tb=e.target.closest(".tab[data-t]");
+if(tb){const u=DB.find(x=>x.id===String(st.id));document.querySelectorAll(".tab[data-t]").forEach(x=>x.classList.toggle("on",x===tb));$("#pn").innerHTML=pane(u,+tb.dataset.t)}});
+document.addEventListener("input",e=>{
+if(e.target.closest("#pickForm"))pickCalc();
+if(e.target.closest("#budForm"))budCalc()});
+document.addEventListener("change",e=>{const id=e.target.dataset&&e.target.dataset.ck;if(id){st.chk=e.target.checked?[...st.chk,id]:st.chk.filter(x=>x!==id);sv("chk",st.chk);ckProg()}});
 $("#q").addEventListener("input",e=>{st.q=e.target.value;if(st.id!==null||st.v!=="cat"){st.id=null;$("#view").classList.remove("on");show("cat")}render()});
-["#gv","#gs","#ga"].forEach(s=>$(s).addEventListener("input",calc));
+$("#sort").addEventListener("change",e=>{st.sort=e.target.value;render()});
+$("#dl").innerHTML=DB.map(u=>`<option value="${esc(short(u.n))}">`).join("");
 $("#hbg").style.backgroundImage=`url('${wm("ist",2000)}')`;
 $("#glass").style.backgroundImage=`url('${wm("cap",600)}')`;
 stats();cities();bricks();drawChips();render();
